@@ -4,9 +4,7 @@ using ::testing::AtLeast;
 
 // TODO: Remove testing examples
 
-TEST(TestTestsWork, ShouldFail) {
-    EXPECT_EQ(false, true);
-}
+TEST(TestTestsWork, ShouldFail) { EXPECT_EQ(false, true); }
 
 class Turtle {
   virtual void PenUp() = 0;
@@ -30,7 +28,7 @@ class MockTurtle : public Turtle {
 };
 
 TEST(ExampleMock, MockWorks) {
-    MockTurtle turtle;
-    EXPECT_CALL(turtle, PenDown()).Times(AtLeast(1));
-    turtle.PenDown();
+  MockTurtle turtle;
+  EXPECT_CALL(turtle, PenDown()).Times(AtLeast(1));
+  turtle.PenDown();
 }
