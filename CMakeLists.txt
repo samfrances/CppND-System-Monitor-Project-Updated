@@ -23,6 +23,6 @@ add_subdirectory(thirdparty/googletest)
 # Add the testing executable
 add_executable(test test/test_tests.cpp)
 
-target_link_libraries(test gtest_main)
+target_link_libraries(test gmock_main)
 
 set_property(TARGET test PROPERTY CXX_STANDARD 17)
