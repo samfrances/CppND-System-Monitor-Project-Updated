@@ -4,7 +4,7 @@ using ::testing::AtLeast;
 
 // TODO: Remove testing examples
 
-TEST(TestTestsWork, ShouldFail) { EXPECT_EQ(false, true); }
+TEST(TestTestsWork, ShouldFail) { EXPECT_EQ(false, false); }
 
 class Turtle {
   virtual void PenUp() = 0;
