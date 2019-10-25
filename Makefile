@@ -12,6 +12,10 @@ build:
 	cmake .. && \
 	make
 
+.PHONY: test
+test: build
+	./build/test
+
 .PHONY: debug
 debug:
 	mkdir -p build
