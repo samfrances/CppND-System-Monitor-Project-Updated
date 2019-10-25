@@ -13,3 +13,16 @@ set_property(TARGET monitor PROPERTY CXX_STANDARD 17)
 target_link_libraries(monitor ${CURSES_LIBRARIES})
 # TODO: Run -Werror in CI.
 target_compile_options(monitor PRIVATE -Wall -Wextra)
+
+# Testing setup
+# based on example in https://github.com/udacity/CppND-Route-Planning-Project
+
+# Add the GoogleTest library subdirectory
+add_subdirectory(thirdparty/googletest)
+
+# Add the testing executable
+add_executable(test test/test_tests.cpp)
+
+target_link_libraries(test gtest_main)
+
+set_property(TARGET test PROPERTY CXX_STANDARD 17)
