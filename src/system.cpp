@@ -13,7 +13,7 @@ using std::size_t;
 using std::string;
 using std::vector;
 
-System::System(ILinuxParser& p) : parser(p) {}
+System::System(const ILinuxParser& p) : parser(p) {}
 
 // TODO: Return the system's CPU
 Processor& System::Cpu() { return cpu_; }
