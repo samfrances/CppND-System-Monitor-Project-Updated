@@ -16,6 +16,10 @@ build:
 test: build
 	./build/test
 
+.PHONY: run
+run: build
+	./build/monitor
+
 .PHONY: debug
 debug:
 	mkdir -p build
