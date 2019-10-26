@@ -12,6 +12,7 @@
 namespace LinuxParserPure {
 
 // System
+float MemoryUtilization(std::istream&);
 std::string OperatingSystem(std::istream&);
 std::string Kernel(std::istream&);
 
