@@ -20,5 +20,14 @@ string LinuxParserPure::OperatingSystem(std::istream& filestream) {
       }
     }
   }
-  return value;
+  return "";
+}
+
+string LinuxParserPure::Kernel(std::istream& filestream) {
+  string os, version, kernel;
+  string line;
+  std::getline(filestream, line);
+  std::istringstream linestream(line);
+  linestream >> os >> version >> kernel;
+  return kernel;
 }

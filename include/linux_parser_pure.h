@@ -13,6 +13,7 @@ namespace LinuxParserPure {
 
 // System
 std::string OperatingSystem(std::istream&);
+std::string Kernel(std::istream&);
 
 };  // namespace LinuxParserLogic
 
