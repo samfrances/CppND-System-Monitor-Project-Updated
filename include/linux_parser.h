@@ -34,6 +34,7 @@ public:
 
 class LinuxParser: public ILinuxParser {
 public:
+  LinuxParser(std::string prefix = "");
   // System
   float MemoryUtilization() const override;
   long UpTime() const override;
@@ -59,6 +60,7 @@ public:
 
 private:
   // Paths
+  const std::string kPrefix;
   const std::string kProcDirectory{"/proc/"};
   const std::string kCmdlineFilename{"/cmdline"};
   const std::string kCpuinfoFilename{"/cpuinfo"};

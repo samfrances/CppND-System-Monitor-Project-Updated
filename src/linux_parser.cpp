@@ -11,9 +11,11 @@ using std::string;
 using std::to_string;
 using std::vector;
 
+LinuxParser::LinuxParser(string prefix) : kPrefix(prefix) {}
+
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::OperatingSystem() const {
-  std::ifstream filestream(kOSPath);
+  std::ifstream filestream(kPrefix + kOSPath);
   if (filestream.is_open()) {
     return LinuxParserPure::OperatingSystem(filestream);
   }
@@ -22,7 +24,7 @@ string LinuxParser::OperatingSystem() const {
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::Kernel() const {
-  std::ifstream stream(kProcDirectory + kVersionFilename);
+  std::ifstream stream(kPrefix + kProcDirectory + kVersionFilename);
   if (stream.is_open()) {
     return LinuxParserPure::Kernel(stream);
   }
@@ -33,7 +35,7 @@ string LinuxParser::Kernel() const {
 // NOTE: My version of gcc does not support std::filesystem
 vector<int> LinuxParser::Pids() const {
   vector<int> pids;
-  DIR* directory = opendir(kProcDirectory.c_str());
+  DIR* directory = opendir((kPrefix + kProcDirectory).c_str());
   struct dirent* file;
   while ((file = readdir(directory)) != nullptr) {
     // Is this a directory?
