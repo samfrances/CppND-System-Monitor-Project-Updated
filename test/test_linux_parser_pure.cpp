@@ -138,3 +138,26 @@ TEST(LinuxParserPureTests, UpTime) {
     }
 
 }
+
+TEST(LinuxParserPure, MemoryUtilization) {
+
+    // Incomplete example
+    std::istringstream proc_meminfo(
+        "MemTotal:        7910692 kB\n"
+        "MemFree:          505260 kB\n"
+        "MemAvailable:    2281140 kB\n"
+        "Buffers:         1486140 kB\n"
+        "Cached:          2617628 kB\n"
+        "SwapCached:            0 kB\n"
+        "Active:          5366276 kB\n"
+        "Inactive:        1481720 kB\n"
+    );
+
+    const float total = 7910692;
+    const float free = 505260;
+    EXPECT_EQ(
+        LinuxParserPure::MemoryUtilization(proc_meminfo),
+        (total - free) / total
+    );
+
+}

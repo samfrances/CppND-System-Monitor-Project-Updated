@@ -21,6 +21,30 @@ namespace {
   }
 }
 
+float LinuxParserPure::MemoryUtilization(std::istream& filestream) {
+  string line;
+  string key;
+  float total = -1;
+  float free = -1;
+  float value;
+  while (std::getline(filestream, line)) {
+    std::istringstream linestream(line);
+    linestream >> key >> value;
+    if (key == "MemTotal:") {
+      total = value;
+    }
+    else if (key == "MemFree:") {
+      free = value;
+    }
+
+    if (total > -1 && free > -1) {
+      return (total - free) / total;
+    }
+
+  }
+  return 0.0;
+}
+
 long LinuxParserPure::UpTime(std::istream& filestream) {
   long uptime;
   string line;
