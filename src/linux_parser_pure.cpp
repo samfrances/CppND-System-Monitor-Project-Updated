@@ -4,6 +4,23 @@
 
 using std::string;
 
+// "Private" namespace
+namespace {
+  int ParseProcStat(std::istream& filestream, string desired_key) {
+    string line;
+    string key;
+    int value;
+    while (std::getline(filestream, line)) {
+      std::istringstream linestream(line);
+      linestream >> key >> value;
+      if (key == desired_key) {
+        return value;
+      }
+    }
+    return 0;
+  }
+}
+
 string LinuxParserPure::OperatingSystem(std::istream& filestream) {
   string key;
   string value;
@@ -33,15 +50,9 @@ string LinuxParserPure::Kernel(std::istream& filestream) {
 }
 
 int LinuxParserPure::TotalProcesses(std::istream& filestream) {
-  string line;
-  string key;
-  int value;
-  while (std::getline(filestream, line)) {
-    std::istringstream linestream(line);
-    linestream >> key >> value;
-    if (key == "processes") {
-      return value;
-    }
-  }
-  return 0;
+  return ParseProcStat(filestream, "processes");
+}
+
+int LinuxParserPure::RunningProcesses(std::istream& filestream) {
+  return ParseProcStat(filestream, "procs_running");
 }

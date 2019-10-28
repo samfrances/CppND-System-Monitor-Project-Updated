@@ -85,3 +85,32 @@ TEST(LinuxParserPureTests, TotalProcesses) {
         32
     );
 }
+
+TEST(LinuxParserPureTests, RunningProcesses) {
+
+    // Truncated example
+    std::istringstream proc_stat_example_1(
+        "ctxt 70733117\n"
+        "processes 11102\n"
+        "procs_running 15\n"
+        "procs_blocked 0\n"
+    );
+
+    std::istringstream proc_stat_example_2(
+        "ctxt 70733117\n"
+        "processes 11102\n"
+        "procs_running 589\n"
+        "procs_blocked 0\n"
+    );
+
+
+    EXPECT_EQ(
+        LinuxParserPure::RunningProcesses(proc_stat_example_1),
+        15
+    );
+
+    EXPECT_EQ(
+        LinuxParserPure::RunningProcesses(proc_stat_example_2),
+        589
+    );
+}
