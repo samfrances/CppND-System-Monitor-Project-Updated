@@ -56,3 +56,12 @@ int LinuxParserPure::TotalProcesses(std::istream& filestream) {
 int LinuxParserPure::RunningProcesses(std::istream& filestream) {
   return ParseProcStat(filestream, "procs_running");
 }
+
+long LinuxParserPure::UpTime(std::istream& filestream) {
+  long uptime;
+  string line;
+  std::getline(filestream, line);
+  std::istringstream linestream(line);
+  linestream >> uptime;
+  return uptime;
+}

@@ -114,3 +114,27 @@ TEST(LinuxParserPureTests, RunningProcesses) {
         589
     );
 }
+
+TEST(LinuxParserPureTests, UpTime) {
+
+    std::istringstream proc_uptime_example_1("13145.60 43993.58");
+
+    std::istringstream proc_uptime_example_2("2586.03 19468.30");
+
+    {
+        const long expected = 13145.60;
+        EXPECT_EQ(
+            LinuxParserPure::UpTime(proc_uptime_example_1),
+            expected
+        );
+    }
+
+    {
+        const long expected = 2586.03;
+        EXPECT_EQ(
+            LinuxParserPure::UpTime(proc_uptime_example_2),
+            expected
+        );
+    }
+
+}

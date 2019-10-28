@@ -13,11 +13,12 @@ namespace LinuxParserPure {
 
 // System
 float MemoryUtilization(std::istream&);
+long UpTime(std::istream&);
 int TotalProcesses(std::istream&);
 int RunningProcesses(std::istream&);
 std::string OperatingSystem(std::istream&);
 std::string Kernel(std::istream&);
 
-};  // namespace LinuxParserLogic
+};  // namespace LinuxParserPure
 
 #endif
