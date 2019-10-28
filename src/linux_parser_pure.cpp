@@ -31,3 +31,17 @@ string LinuxParserPure::Kernel(std::istream& filestream) {
   linestream >> os >> version >> kernel;
   return kernel;
 }
+
+int LinuxParserPure::TotalProcesses(std::istream& filestream) {
+  string line;
+  string key;
+  int value;
+  while (std::getline(filestream, line)) {
+    std::istringstream linestream(line);
+    linestream >> key >> value;
+    if (key == "processes") {
+      return value;
+    }
+  }
+  return 0;
+}

@@ -56,3 +56,32 @@ TEST(LinuxParserPureTests, TestKernel) {
 
     EXPECT_EQ(result, "4.15.0-66-generic");
 }
+
+TEST(LinuxParserPureTests, TotalProcesses) {
+
+    // Truncated example
+    std::istringstream proc_stat_example_1(
+        "ctxt 70733117\n"
+        "processes 11102\n"
+        "procs_running 15\n"
+        "procs_blocked 0\n"
+    );
+
+    std::istringstream proc_stat_example_2(
+        "ctxt 70733117\n"
+        "processes 32\n"
+        "procs_running 15\n"
+        "procs_blocked 0\n"
+    );
+
+
+    EXPECT_EQ(
+        LinuxParserPure::TotalProcesses(proc_stat_example_1),
+        11102
+    );
+
+    EXPECT_EQ(
+        LinuxParserPure::TotalProcesses(proc_stat_example_2),
+        32
+    );
+}
