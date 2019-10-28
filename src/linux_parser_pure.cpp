@@ -21,6 +21,23 @@ namespace {
   }
 }
 
+long LinuxParserPure::UpTime(std::istream& filestream) {
+  long uptime;
+  string line;
+  std::getline(filestream, line);
+  std::istringstream linestream(line);
+  linestream >> uptime;
+  return uptime;
+}
+
+int LinuxParserPure::TotalProcesses(std::istream& filestream) {
+  return ParseProcStat(filestream, "processes");
+}
+
+int LinuxParserPure::RunningProcesses(std::istream& filestream) {
+  return ParseProcStat(filestream, "procs_running");
+}
+
 string LinuxParserPure::OperatingSystem(std::istream& filestream) {
   string key;
   string value;
@@ -47,21 +64,4 @@ string LinuxParserPure::Kernel(std::istream& filestream) {
   std::istringstream linestream(line);
   linestream >> os >> version >> kernel;
   return kernel;
-}
-
-int LinuxParserPure::TotalProcesses(std::istream& filestream) {
-  return ParseProcStat(filestream, "processes");
-}
-
-int LinuxParserPure::RunningProcesses(std::istream& filestream) {
-  return ParseProcStat(filestream, "procs_running");
-}
-
-long LinuxParserPure::UpTime(std::istream& filestream) {
-  long uptime;
-  string line;
-  std::getline(filestream, line);
-  std::istringstream linestream(line);
-  linestream >> uptime;
-  return uptime;
 }
