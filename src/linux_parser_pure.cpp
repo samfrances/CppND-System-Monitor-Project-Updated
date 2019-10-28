@@ -24,20 +24,24 @@ namespace {
 float LinuxParserPure::MemoryUtilization(std::istream& filestream) {
   string line;
   string key;
-  float total = -1;
-  float free = -1;
+  bool totalFound = false;
+  float total;
+  bool freeFound = false;
+  float free;
   float value;
   while (std::getline(filestream, line)) {
     std::istringstream linestream(line);
     linestream >> key >> value;
     if (key == "MemTotal:") {
       total = value;
+      totalFound = true;
     }
     else if (key == "MemFree:") {
       free = value;
+      freeFound = true;
     }
 
-    if (total > -1 && free > -1) {
+    if (totalFound && freeFound) {
       return (total - free) / total;
     }
 
