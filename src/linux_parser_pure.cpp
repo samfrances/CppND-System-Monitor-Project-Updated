@@ -101,3 +101,20 @@ string LinuxParserPure::Command(std::istream& filestream) {
   }
   return "";
 }
+
+string LinuxParserPure::Ram(std::istream& filestream) {
+  string line;
+  string key;
+  string value;
+  while (std::getline(filestream, line)) {
+    std::istringstream linestream(line);
+    linestream >> key >> value;
+    if (key == "VmSize:") {
+      if (std::all_of(value.begin(), value.end(), isdigit)) {
+        return std::to_string(stoi(value) / 1024.0);
+      }
+      break;
+    }
+  }
+  return "";
+}

@@ -21,7 +21,7 @@ namespace LinuxParserPure {
 
   // Processes
   std::string Command(std::istream&);
-  std::string Ram(std::istream&); // TODO
+  std::string Ram(std::istream&);
   std::string Uid(std::istream&); // TODO
   std::string User(std::istream&, std::string uid); // TODO
   long int UpTime(std::istream&); // TODO
