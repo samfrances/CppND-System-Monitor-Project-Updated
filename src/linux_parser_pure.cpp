@@ -19,6 +19,28 @@ namespace {
     }
     return 0;
   }
+
+  /**
+   * Parse a /proc/<pid>/status file, searching for a specified key, and
+   * return the first of the space separated values for that key, if it
+   * is a numerical string. Otherwise return "".
+   */
+  string ParseProcStatusDigit(std::istream& filestream, string desired_key) {
+    string line;
+    string key;
+    string value;
+    while (std::getline(filestream, line)) {
+      std::istringstream linestream(line);
+      linestream >> key >> value;
+      if (key == desired_key + ":") {
+        if (std::all_of(value.begin(), value.end(), isdigit)) {
+          return value;
+        }
+        break;
+      }
+    }
+    return "";
+  }
 }
 
 float LinuxParserPure::MemoryUtilization(std::istream& filestream) {
@@ -103,18 +125,14 @@ string LinuxParserPure::Command(std::istream& filestream) {
 }
 
 string LinuxParserPure::Ram(std::istream& filestream) {
-  string line;
-  string key;
-  string value;
-  while (std::getline(filestream, line)) {
-    std::istringstream linestream(line);
-    linestream >> key >> value;
-    if (key == "VmSize:") {
-      if (std::all_of(value.begin(), value.end(), isdigit)) {
-        return std::to_string(stoi(value) / 1024.0);
-      }
-      break;
-    }
+  string value = ParseProcStatusDigit(filestream, "VmSize");
+  if (value == "") {
+    return value;
   }
-  return "";
+  return std::to_string(stoi(value) / 1024.0);
+}
+
+
+string LinuxParserPure::Uid(std::istream& filestream) {
+  return ParseProcStatusDigit(filestream, "Uid");
 }
