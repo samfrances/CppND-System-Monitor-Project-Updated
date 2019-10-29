@@ -20,7 +20,7 @@ std::string OperatingSystem(std::istream&);
 std::string Kernel(std::istream&);
 
 // Processes
-std::string Command(std::istream&); // TODO
+std::string Command(std::istream&);
 std::string Ram(std::istream&); // TODO
 std::string Uid(std::istream&); // TODO
 std::string User(std::istream&, std::string uid); // TODO

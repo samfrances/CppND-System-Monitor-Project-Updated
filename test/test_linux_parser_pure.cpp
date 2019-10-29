@@ -161,3 +161,20 @@ TEST(LinuxParserPure, MemoryUtilization) {
     );
 
 }
+
+TEST(LinuxParserPure, Command) {
+
+    std::istringstream cmdline("/usr/bin/foo -d --bar\n");
+    std::istringstream cmdline_blank("");
+
+    EXPECT_EQ(
+        LinuxParserPure::Command(cmdline),
+        "/usr/bin/foo -d --bar"
+    );
+
+    EXPECT_EQ(
+        LinuxParserPure::Command(cmdline_blank),
+        ""
+    );
+
+}

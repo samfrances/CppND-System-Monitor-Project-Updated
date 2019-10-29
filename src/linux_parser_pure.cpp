@@ -93,3 +93,11 @@ string LinuxParserPure::Kernel(std::istream& filestream) {
   linestream >> os >> version >> kernel;
   return kernel;
 }
+
+string LinuxParserPure::Command(std::istream& filestream) {
+  string line;
+  if (std::getline(filestream, line)) {
+    return line;
+  }
+  return "";
+}
