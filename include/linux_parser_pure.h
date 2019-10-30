@@ -39,6 +39,7 @@ namespace LinuxParserPure {
     // System
     std::string MemoryUtilization(std::string root = "/"); // TODO
     std::string UpTime(std::string root = "/"); // TODO
+    std::string Pids(std::string root = "/"); // TODO
     std::string TotalProcesses(std::string root = "/"); // TODO
     std::string RunningProcesses(std::string root = "/"); // TODO
     std::string OperatingSystem(std::string root = "/");
