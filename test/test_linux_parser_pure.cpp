@@ -139,7 +139,7 @@ TEST(LinuxParserPureTests, UpTime) {
 
 }
 
-TEST(LinuxParserPure, MemoryUtilization) {
+TEST(LinuxParserPureTests, MemoryUtilization) {
 
     // Incomplete example
     std::istringstream proc_meminfo(
@@ -162,7 +162,7 @@ TEST(LinuxParserPure, MemoryUtilization) {
 
 }
 
-TEST(LinuxParserPure, Command) {
+TEST(LinuxParserPureTests, Command) {
 
     std::istringstream cmdline("/usr/bin/foo -d --bar\n");
     std::istringstream cmdline_blank("");
