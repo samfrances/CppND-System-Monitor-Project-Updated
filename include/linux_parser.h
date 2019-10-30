@@ -61,7 +61,6 @@ public:
 private:
   // Paths
   const std::string kPrefix;
-  const std::string kProcDirectory{"/proc/"};
 
   enum CPUStates {
     kUser_ = 0,

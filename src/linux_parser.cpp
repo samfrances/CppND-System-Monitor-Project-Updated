@@ -35,7 +35,7 @@ string LinuxParser::Kernel() const {
 // NOTE: My version of gcc does not support std::filesystem
 vector<int> LinuxParser::Pids() const {
   vector<int> pids;
-  DIR* directory = opendir((kPrefix + kProcDirectory).c_str());
+  DIR* directory = opendir(LinuxParserPure::Paths::Pids(kPrefix).c_str());
   struct dirent* file;
   while ((file = readdir(directory)) != nullptr) {
     // Is this a directory?

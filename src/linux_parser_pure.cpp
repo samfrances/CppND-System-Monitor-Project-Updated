@@ -125,6 +125,10 @@ string LinuxParserPure::Paths::Kernel(std::string root) {
   return root + kProcDirectory + kVersionFilename;
 }
 
+string LinuxParserPure::Paths::Pids(std::string root) {
+  return root + kProcDirectory;
+}
+
 string LinuxParserPure::Command(std::istream& filestream) {
   string line;
   if (std::getline(filestream, line)) {

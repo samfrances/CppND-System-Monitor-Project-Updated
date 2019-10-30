@@ -383,3 +383,16 @@ TEST(PathTests, Kernel) {
         "/foo/bar/proc/version"
     );
 }
+
+TEST(PathTests, Pids) {
+
+    EXPECT_EQ(
+        LinuxParserPure::Paths::Pids(),
+        "/proc/"
+    );
+
+    EXPECT_EQ(
+        LinuxParserPure::Paths::Pids("/foo/bar/"),
+        "/foo/bar/proc/"
+    );
+}
