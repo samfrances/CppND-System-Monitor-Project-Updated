@@ -44,7 +44,7 @@ namespace LinuxParserPure {
     std::string OperatingSystem(std::string root = "/");
     std::string Kernel(std::string root = "/"); // TODO
 
-    // User
+    // Processes
     std::string Command(int pid, std::string root = "/"); // TODO
     std::string Ram(int pid, std::string root = "/"); // TODO
     std::string Uid(int pid, std::string root = "/"); // TODO
