@@ -108,6 +108,10 @@ string LinuxParserPure::OperatingSystem(std::istream& filestream) {
   return "";
 }
 
+string LinuxParserPure::Paths::OperatingSystem(std::string root) {
+  return root + kOSPath;
+}
+
 string LinuxParserPure::Kernel(std::istream& filestream) {
   string os, version, kernel;
   string line;

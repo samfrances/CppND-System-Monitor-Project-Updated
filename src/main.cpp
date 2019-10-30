@@ -3,7 +3,7 @@
 #include "linux_parser.h"
 
 int main() {
-  LinuxParser parser;
+  LinuxParser parser("/");
   System system(parser);
   NCursesDisplay::Display(system);
 }

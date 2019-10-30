@@ -61,7 +61,6 @@ public:
 private:
   // Paths
   const std::string kPrefix;
-  const std::string kOSPath{"/etc/os-release"};
   const std::string kProcDirectory{"/proc/"};
   const std::string kVersionFilename{"/version"};
 

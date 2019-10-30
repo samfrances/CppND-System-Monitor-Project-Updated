@@ -15,7 +15,7 @@ LinuxParser::LinuxParser(string prefix) : kPrefix(prefix) {}
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::OperatingSystem() const {
-  std::ifstream filestream(kPrefix + kOSPath);
+  std::ifstream filestream(LinuxParserPure::Paths::OperatingSystem(kPrefix));
   if (filestream.is_open()) {
     return LinuxParserPure::OperatingSystem(filestream);
   }

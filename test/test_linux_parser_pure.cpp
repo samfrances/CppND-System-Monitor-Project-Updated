@@ -357,3 +357,16 @@ TEST(LinuxParserPureTests, Uptime) {
         1820L / sysconf(_SC_CLK_TCK)
     );
 }
+
+TEST(PathTests, OperatingSystem) {
+
+    EXPECT_EQ(
+        LinuxParserPure::Paths::OperatingSystem(),
+        "/etc/os-release"
+    );
+
+    EXPECT_EQ(
+        LinuxParserPure::Paths::OperatingSystem("/foo/bar/"),
+        "/foo/bar/etc/os-release"
+    );
+}
