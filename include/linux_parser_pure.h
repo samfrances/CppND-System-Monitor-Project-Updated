@@ -19,6 +19,13 @@ namespace LinuxParserPure {
   std::string OperatingSystem(std::istream&);
   std::string Kernel(std::istream&);
 
+  // CPU
+  std::vector<std::string> CpuUtilization(); // TODO
+  long Jiffies(std::istream&); // TODO
+  long ActiveJiffies(std::istream&); // TODO
+  long ActiveJiffiesForProcess(std::istream&); // TODO
+  long IdleJiffies(std::istream&); // TODO
+
   // Processes
   std::string Command(std::istream&);
   std::string Ram(std::istream&);
