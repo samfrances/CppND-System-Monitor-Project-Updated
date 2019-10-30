@@ -23,7 +23,7 @@ namespace LinuxParserPure {
   std::string Command(std::istream&);
   std::string Ram(std::istream&);
   std::string Uid(std::istream&);
-  std::string User(std::istream&, std::string uid); // TODO
+  std::string User(std::istream&, std::string uid);
   long int UpTime(std::istream&); // TODO
 
   // Paths of system files

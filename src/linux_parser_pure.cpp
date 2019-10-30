@@ -136,3 +136,20 @@ string LinuxParserPure::Ram(std::istream& filestream) {
 string LinuxParserPure::Uid(std::istream& filestream) {
   return ParseProcStatusDigit(filestream, "Uid");
 }
+
+string LinuxParserPure::User(std::istream& filestream, string desired_uid) {
+  string line;
+  string username;
+  string pwd;
+  string uid;
+  while (std::getline(filestream, line)) {
+    std::replace(line.begin(), line.end(), ' ', '_');
+    std::replace(line.begin(), line.end(), ':', ' ');
+    std::istringstream linestream(line);
+    linestream >> username >> pwd >> uid;
+    if (uid == desired_uid) {
+      return username;
+    }
+  }
+  return "";
+}

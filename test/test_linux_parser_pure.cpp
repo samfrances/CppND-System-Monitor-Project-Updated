@@ -298,3 +298,48 @@ TEST_F(ProcStatusTest, Uid) {
     );
 
 }
+
+TEST(LinuxParserPureTests, User) {
+
+    std::string etc_passwd(
+        "root:!:0:0::/:/usr/bin/ksh\n"
+        "daemon:!:1:1::/etc:\n"
+        "bin:!:2:2::/bin:\n"
+        "sys:!:3:3::/usr/sys: \n"
+        "adm:!:4:4::/var/adm:\n"
+        "uucp:!:5:5::/usr/lib/uucp: \n"
+        "guest:!:100:100::/home/guest:\n"
+        "nobody:!:4294967294:4294967294::/:\n"
+        "lpd:!:9:4294967294::/:\n"
+        "lp:*:11:11::/var/spool/lp:/bin/false \n"
+        "invscout:*:200:1::/var/adm/invscout:/usr/bin/ksh\n"
+        "nuucp:*:6:5:uucp login user:/var/spool/uucppublic:/usr/sbin/uucp/uucico\n"
+        "paul:!:201:1::/home/paul:/usr/bin/ksh\n"
+        "jdoe:*:202:1:John Doe:/home/jdoe:/usr/bin/ksh\n"
+    );
+
+    {
+        std::istringstream fstream(etc_passwd);
+        EXPECT_EQ(
+            LinuxParserPure::User(fstream, "202"),
+            "jdoe"
+        );
+    }
+
+    {
+        std::istringstream fstream(etc_passwd);
+        EXPECT_EQ(
+            LinuxParserPure::User(fstream, "201"),
+            "paul"
+        );
+    }
+
+    {
+        std::istringstream fstream(etc_passwd);
+        EXPECT_EQ(
+            LinuxParserPure::User(fstream, "203"),
+            ""
+        );
+    }
+
+}
