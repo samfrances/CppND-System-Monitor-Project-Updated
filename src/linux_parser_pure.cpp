@@ -1,4 +1,5 @@
 #include <string>
+#include <unistd.h>
 
 #include "linux_parser_pure.h"
 
@@ -152,4 +153,16 @@ string LinuxParserPure::User(std::istream& filestream, string desired_uid) {
     }
   }
   return "";
+}
+
+long int LinuxParserPure::ProcessUpTime(std::istream& filestream) {
+  string line;
+  if (std::getline(filestream, line)) {
+    string starttime;
+    std::istringstream contents(line);
+    for (int i = 1; i <= 22; i++) {
+      contents >> starttime;
+    }
+    return stol(starttime) / sysconf(_SC_CLK_TCK);
+  }
 }
