@@ -24,7 +24,7 @@ string LinuxParser::OperatingSystem() const {
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::Kernel() const {
-  std::ifstream stream(kPrefix + kProcDirectory + kVersionFilename);
+  std::ifstream stream(LinuxParserPure::Paths::Kernel(kPrefix));
   if (stream.is_open()) {
     return LinuxParserPure::Kernel(stream);
   }

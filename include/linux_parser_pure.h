@@ -43,7 +43,7 @@ namespace LinuxParserPure {
     std::string TotalProcesses(std::string root = "/"); // TODO
     std::string RunningProcesses(std::string root = "/"); // TODO
     std::string OperatingSystem(std::string root = "/");
-    std::string Kernel(std::string root = "/"); // TODO
+    std::string Kernel(std::string root = "/");
 
     // Processes
     std::string Command(int pid, std::string root = "/"); // TODO
@@ -53,14 +53,14 @@ namespace LinuxParserPure {
     std::string UpTime(int pid, std::string root = "/"); // TODO
 
     // Paths
-    const std::string kProcDirectory{"/proc/"};
+    const std::string kProcDirectory{"proc/"};
     const std::string kCmdlineFilename{"/cmdline"};
     const std::string kCpuinfoFilename{"/cpuinfo"};
     const std::string kStatusFilename{"/status"};
     const std::string kStatFilename{"/stat"};
     const std::string kUptimeFilename{"/uptime"};
     const std::string kMeminfoFilename{"/meminfo"};
-    const std::string kVersionFilename{"/version"};
+    const std::string kVersionFilename{"version"};
     const std::string kOSPath{"etc/os-release"};
     const std::string kPasswordPath{"/etc/passwd"};
 

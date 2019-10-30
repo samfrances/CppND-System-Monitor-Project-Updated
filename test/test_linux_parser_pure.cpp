@@ -370,3 +370,16 @@ TEST(PathTests, OperatingSystem) {
         "/foo/bar/etc/os-release"
     );
 }
+
+TEST(PathTests, Kernel) {
+
+    EXPECT_EQ(
+        LinuxParserPure::Paths::Kernel(),
+        "/proc/version"
+    );
+
+    EXPECT_EQ(
+        LinuxParserPure::Paths::Kernel("/foo/bar/"),
+        "/foo/bar/proc/version"
+    );
+}
