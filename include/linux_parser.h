@@ -60,7 +60,7 @@ public:
 
 private:
   // Paths
-  const std::string kPrefix;
+  const std::string kRoot;
 
   enum CPUStates {
     kUser_ = 0,

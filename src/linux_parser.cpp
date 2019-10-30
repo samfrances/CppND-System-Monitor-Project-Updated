@@ -11,11 +11,11 @@ using std::string;
 using std::to_string;
 using std::vector;
 
-LinuxParser::LinuxParser(string prefix) : kPrefix(prefix) {}
+LinuxParser::LinuxParser(string root) : kRoot(root) {}
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::OperatingSystem() const {
-  std::ifstream filestream(LinuxParserPure::Paths::OperatingSystem(kPrefix));
+  std::ifstream filestream(LinuxParserPure::Paths::OperatingSystem(kRoot));
   if (filestream.is_open()) {
     return LinuxParserPure::OperatingSystem(filestream);
   }
@@ -24,7 +24,7 @@ string LinuxParser::OperatingSystem() const {
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::Kernel() const {
-  std::ifstream stream(LinuxParserPure::Paths::Kernel(kPrefix));
+  std::ifstream stream(LinuxParserPure::Paths::Kernel(kRoot));
   if (stream.is_open()) {
     return LinuxParserPure::Kernel(stream);
   }
@@ -35,7 +35,7 @@ string LinuxParser::Kernel() const {
 // NOTE: My version of gcc does not support std::filesystem
 vector<int> LinuxParser::Pids() const {
   vector<int> pids;
-  DIR* directory = opendir(LinuxParserPure::Paths::Pids(kPrefix).c_str());
+  DIR* directory = opendir(LinuxParserPure::Paths::Pids(kRoot).c_str());
   struct dirent* file;
   while ((file = readdir(directory)) != nullptr) {
     // Is this a directory?
