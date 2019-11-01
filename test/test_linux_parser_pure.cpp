@@ -476,3 +476,51 @@ TEST(PathTests, Command) {
   );
 
 }
+
+TEST(PathTests, Ram) {
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::Ram(35),
+    "/proc/35/status"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::Ram(35, "/foo/bar/"),
+    "/foo/bar/proc/35/status"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::Ram(198),
+    "/proc/198/status"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::Ram(198, "/foo/bar/"),
+    "/foo/bar/proc/198/status"
+  );
+
+}
+
+TEST(PathTests, Uid) {
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::Uid(35),
+    "/proc/35/status"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::Uid(35, "/foo/bar/"),
+    "/foo/bar/proc/35/status"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::Uid(198),
+    "/proc/198/status"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::Uid(198, "/foo/bar/"),
+    "/foo/bar/proc/198/status"
+  );
+
+}

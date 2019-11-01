@@ -42,6 +42,7 @@ namespace {
     }
     return "";
   }
+
 }
 
 float LinuxParserPure::MemoryUtilization(std::istream& filestream) {
@@ -145,6 +146,11 @@ string LinuxParserPure::Paths::Pids(std::string root) {
   return root + kProcDirectory;
 }
 
+// Helper method to produce the /proc/<pid>/ directory string
+string LinuxParserPure::Paths::ProcessDir(int pid, string root) {
+  return root + kProcDirectory + std::to_string(pid) + "/";
+}
+
 string LinuxParserPure::Command(std::istream& filestream) {
   string line;
   if (std::getline(filestream, line)) {
@@ -154,7 +160,7 @@ string LinuxParserPure::Command(std::istream& filestream) {
 }
 
 string LinuxParserPure::Paths::Command(int pid, std::string root) {
-  return root + kProcDirectory + std::to_string(pid) + "/" + kCmdlineFilename;
+  return ProcessDir(pid, root) + kCmdlineFilename;
 }
 
 string LinuxParserPure::Ram(std::istream& filestream) {
@@ -165,9 +171,17 @@ string LinuxParserPure::Ram(std::istream& filestream) {
   return std::to_string(stoi(value) / 1024.0);
 }
 
+string LinuxParserPure::Paths::Ram(int pid, std::string root) {
+  return ProcessDir(pid, root) + kStatusFilename;
+}
+
 
 string LinuxParserPure::Uid(std::istream& filestream) {
   return ParseProcStatusDigit(filestream, "Uid");
+}
+
+string LinuxParserPure::Paths::Uid(int pid, std::string root) {
+  return ProcessDir(pid, root) + kStatusFilename;
 }
 
 string LinuxParserPure::User(std::istream& filestream, string desired_uid) {
