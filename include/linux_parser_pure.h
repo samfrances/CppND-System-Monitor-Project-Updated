@@ -19,10 +19,10 @@ std::string OperatingSystem(std::istream&);
 std::string Kernel(std::istream&);
 
 // CPU
-class CpuUsage {
+class CpuUtilizationSnapshot {
  public:
-  CpuUsage(long user, long nice, long system, long idle, long iowait, long irq,
-           long softirq, long steal)
+  CpuUtilizationSnapshot(long user, long nice, long system, long idle,
+                         long iowait, long irq, long softirq, long steal)
       : user(user),
         nice(nice),
         system(system),
@@ -45,7 +45,7 @@ class CpuUsage {
   long IdleJiffies();
 };
 
-CpuUsage CpuUtilization(std::istream&);
+CpuUtilizationSnapshot CpuUtilization(std::istream&);
 long ActiveJiffiesForProcess(std::istream&);  // TODO
 
 // Processes

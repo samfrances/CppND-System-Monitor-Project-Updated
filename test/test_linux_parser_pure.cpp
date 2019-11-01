@@ -179,7 +179,7 @@ TEST(LinuxParserPureTests, CpuUtilization) {
   EXPECT_EQ(usage.steal, 0);
 }
 
-TEST(CpuUsage, Jiffies) {
+TEST(CpuUtilizationSnapshot, Jiffies) {
   long user = 79242;
   long nice = 3;
   long system = 74306;
@@ -189,14 +189,14 @@ TEST(CpuUsage, Jiffies) {
   long softirq = 67701;
   long steal = 1;
 
-  LinuxParserPure::CpuUsage usage(user, nice, system, idle, iowait, irq,
-                                  softirq, steal);
+  LinuxParserPure::CpuUtilizationSnapshot usage(user, nice, system, idle,
+                                                iowait, irq, softirq, steal);
   long expected = user + nice + system + idle + iowait + irq + softirq + steal;
 
   EXPECT_EQ(usage.Jiffies(), expected);
 }
 
-TEST(CpuUsage, IdleJiffies) {
+TEST(CpuUtilizationSnapshot, IdleJiffies) {
   long user = 79242;
   long nice = 3;
   long system = 74306;
@@ -206,14 +206,14 @@ TEST(CpuUsage, IdleJiffies) {
   long softirq = 67701;
   long steal = 1;
 
-  LinuxParserPure::CpuUsage usage(user, nice, system, idle, iowait, irq,
-                                  softirq, steal);
+  LinuxParserPure::CpuUtilizationSnapshot usage(user, nice, system, idle,
+                                                iowait, irq, softirq, steal);
   long expected = idle + iowait;
 
   EXPECT_EQ(usage.IdleJiffies(), expected);
 }
 
-TEST(CpuUsage, ActiveJiffies) {
+TEST(CpuUtilizationSnapshot, ActiveJiffies) {
   long user = 79242;
   long nice = 3;
   long system = 74306;
@@ -223,8 +223,8 @@ TEST(CpuUsage, ActiveJiffies) {
   long softirq = 67701;
   long steal = 1;
 
-  LinuxParserPure::CpuUsage usage(user, nice, system, idle, iowait, irq,
-                                  softirq, steal);
+  LinuxParserPure::CpuUtilizationSnapshot usage(user, nice, system, idle,
+                                                iowait, irq, softirq, steal);
   long expected = user + nice + system + irq + softirq + steal;
 
   EXPECT_EQ(usage.ActiveJiffies(), expected);

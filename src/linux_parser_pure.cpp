@@ -148,7 +148,7 @@ string LinuxParserPure::Paths::Pids(std::string root) {
   return root + kProcDirectory;
 }
 
-LinuxParserPure::CpuUsage LinuxParserPure::CpuUtilization(
+LinuxParserPure::CpuUtilizationSnapshot LinuxParserPure::CpuUtilization(
     std::istream& filestream) {
   string line;
   string word;
@@ -160,21 +160,24 @@ LinuxParserPure::CpuUsage LinuxParserPure::CpuUtilization(
       result.push_back(stol(word));
     }
   }
-  return CpuUsage(result.at(0), result.at(1), result.at(2), result.at(3),
-                  result.at(4), result.at(5), result.at(6), result.at(7));
+  return CpuUtilizationSnapshot(result.at(0), result.at(1), result.at(2),
+                                result.at(3), result.at(4), result.at(5),
+                                result.at(6), result.at(7));
 }
 
 string LinuxParserPure::Paths::CpuUtilization(std::string root) {
   return ProcStat(root);
 }
 
-long LinuxParserPure::CpuUsage::Jiffies() {
+long LinuxParserPure::CpuUtilizationSnapshot::Jiffies() {
   return user + nice + system + idle + iowait + irq + softirq + steal;
 }
 
-long LinuxParserPure::CpuUsage::IdleJiffies() { return idle + iowait; }
+long LinuxParserPure::CpuUtilizationSnapshot::IdleJiffies() {
+  return idle + iowait;
+}
 
-long LinuxParserPure::CpuUsage::ActiveJiffies() {
+long LinuxParserPure::CpuUtilizationSnapshot::ActiveJiffies() {
   return Jiffies() - IdleJiffies();
 }
 
