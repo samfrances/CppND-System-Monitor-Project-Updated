@@ -73,7 +73,9 @@ long LinuxParser::ActiveJiffies() const { return 0; }
 long LinuxParser::IdleJiffies() const { return 0; }
 
 // TODO: Read and return CPU utilization
-vector<string> LinuxParser::CpuUtilization() const { return {}; }
+LinuxParserPure::CpuUtilizationSnapshot LinuxParser::CpuUtilization() const {
+  return {};
+}
 
 // TODO: Read and return the total number of processes
 int LinuxParser::TotalProcesses() const { return 0; }

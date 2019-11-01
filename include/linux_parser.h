@@ -5,6 +5,8 @@
 #include <regex>
 #include <string>
 
+#include "linux_parser_pure.h"
+
 class ILinuxParser {
  public:
   // System
@@ -17,8 +19,7 @@ class ILinuxParser {
   virtual std::string Kernel() const = 0;
 
   // CPU
-  virtual std::vector<std::string> CpuUtilization()
-      const = 0;  // TODO consider making private
+  virtual LinuxParserPure::CpuUtilizationSnapshot CpuUtilization() const = 0;
   virtual long Jiffies() const = 0;
   virtual long ActiveJiffies() const = 0;
   virtual long ActiveJiffies(int pid) const = 0;
@@ -45,7 +46,7 @@ class LinuxParser : public ILinuxParser {
   std::string Kernel() const override;
 
   // CPU
-  std::vector<std::string> CpuUtilization() const override;
+  LinuxParserPure::CpuUtilizationSnapshot CpuUtilization() const override;
   long Jiffies() const override;
   long ActiveJiffies() const override;
   long ActiveJiffies(int pid) const override;

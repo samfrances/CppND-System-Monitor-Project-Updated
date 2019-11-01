@@ -22,15 +22,8 @@ std::string Kernel(std::istream&);
 class CpuUtilizationSnapshot {
  public:
   CpuUtilizationSnapshot(long user, long nice, long system, long idle,
-                         long iowait, long irq, long softirq, long steal)
-      : user(user),
-        nice(nice),
-        system(system),
-        idle(idle),
-        iowait(iowait),
-        irq(irq),
-        softirq(softirq),
-        steal(steal) {}
+                         long iowait, long irq, long softirq, long steal);
+  CpuUtilizationSnapshot();  // TODO remove
   const long user = 0;
   const long nice = 0;
   const long system = 0;

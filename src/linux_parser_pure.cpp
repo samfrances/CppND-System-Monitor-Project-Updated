@@ -169,6 +169,29 @@ string LinuxParserPure::Paths::CpuUtilization(std::string root) {
   return ProcStat(root);
 }
 
+LinuxParserPure::CpuUtilizationSnapshot::CpuUtilizationSnapshot(
+    long user, long nice, long system, long idle, long iowait, long irq,
+    long softirq, long steal)
+    : user(user),
+      nice(nice),
+      system(system),
+      idle(idle),
+      iowait(iowait),
+      irq(irq),
+      softirq(softirq),
+      steal(steal) {}
+
+LinuxParserPure::CpuUtilizationSnapshot::CpuUtilizationSnapshot()  // TODO
+                                                                   // remove
+    : user(0),
+      nice(0),
+      system(0),
+      idle(0),
+      iowait(0),
+      irq(0),
+      softirq(0),
+      steal(0) {}
+
 long LinuxParserPure::CpuUtilizationSnapshot::Jiffies() {
   return user + nice + system + idle + iowait + irq + softirq + steal;
 }
