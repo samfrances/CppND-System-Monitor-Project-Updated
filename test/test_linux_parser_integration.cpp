@@ -93,3 +93,21 @@ TEST(LinuxParserIntegrationTest, MemoryUtilization) {
     EXPECT_NEAR(parser.MemoryUtilization(), expected_utilization, 0.01);
   }
 }
+
+TEST(LinuxParserIntegrationTest, UpTime) {
+  {
+    LinuxParser parser(GetTestFsRoot("one"));
+
+    long expected = 23974;
+
+    EXPECT_EQ(parser.UpTime(), expected);
+  }
+
+  {
+    LinuxParser parser(GetTestFsRoot("two"));
+
+    long expected = 13145;
+
+    EXPECT_EQ(parser.UpTime(), expected);
+  }
+}

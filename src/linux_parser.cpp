@@ -62,7 +62,13 @@ float LinuxParser::MemoryUtilization() const {
 }
 
 // TODO: Read and return the system uptime
-long LinuxParser::UpTime() const { return 0; }
+long LinuxParser::UpTime() const {
+  std::ifstream stream(LinuxParserPure::Paths::UpTime(kRoot));
+  if (stream.is_open()) {
+    return LinuxParserPure::UpTime(stream);
+  }
+  return 0;
+}
 
 // TODO: Read and return the number of jiffies for the system
 // TODO: Consider removing
