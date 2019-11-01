@@ -10,67 +10,67 @@
  */
 namespace LinuxParserPure {
 
-  // System
-  float MemoryUtilization(std::istream&);
-  long UpTime(std::istream&);
-  int TotalProcesses(std::istream&);
-  int RunningProcesses(std::istream&);
-  std::string OperatingSystem(std::istream&);
-  std::string Kernel(std::istream&);
+// System
+float MemoryUtilization(std::istream&);
+long UpTime(std::istream&);
+int TotalProcesses(std::istream&);
+int RunningProcesses(std::istream&);
+std::string OperatingSystem(std::istream&);
+std::string Kernel(std::istream&);
 
-  // CPU
-  std::vector<std::string> CpuUtilization(); // TODO
-  long Jiffies(std::istream&); // TODO
-  long ActiveJiffies(std::istream&); // TODO
-  long ActiveJiffiesForProcess(std::istream&); // TODO
-  long IdleJiffies(std::istream&); // TODO
+// CPU
+std::vector<std::string> CpuUtilization();    // TODO
+long Jiffies(std::istream&);                  // TODO
+long ActiveJiffies(std::istream&);            // TODO
+long ActiveJiffiesForProcess(std::istream&);  // TODO
+long IdleJiffies(std::istream&);              // TODO
 
-  // Processes
-  std::string Command(std::istream&);
-  std::string Ram(std::istream&);
-  std::string Uid(std::istream&);
-  std::string User(std::istream&, std::string uid);
-  long int ProcessUpTime(std::istream&);
+// Processes
+std::string Command(std::istream&);
+std::string Ram(std::istream&);
+std::string Uid(std::istream&);
+std::string User(std::istream&, std::string uid);
+long int ProcessUpTime(std::istream&);
 
-  // Paths of system files
-  namespace Paths {
+// Paths of system files
+namespace Paths {
 
-    // Helpers
-    std::string ProcessDir(int pid, std::string root);
-    std::string ProcStat(std::string root = "/");
+// Helpers
+std::string ProcessDir(int pid, std::string root);
+std::string ProcStat(std::string root = "/");
 
-    // System
-    std::string MemoryUtilization(std::string root = "/");
-    std::string UpTime(std::string root = "/");
-    std::string Pids(std::string root = "/");
-    std::string TotalProcesses(std::string root = "/");
-    std::string RunningProcesses(std::string root = "/");
-    std::string OperatingSystem(std::string root = "/");
-    std::string Kernel(std::string root = "/");
+// System
+std::string MemoryUtilization(std::string root = "/");
+std::string UpTime(std::string root = "/");
+std::string Pids(std::string root = "/");
+std::string TotalProcesses(std::string root = "/");
+std::string RunningProcesses(std::string root = "/");
+std::string OperatingSystem(std::string root = "/");
+std::string Kernel(std::string root = "/");
 
-    // CPU
-    std::string CpuUtilization(std::string root = "/");
+// CPU
+std::string CpuUtilization(std::string root = "/");
 
-    // Processes
-    std::string Command(int pid, std::string root = "/");
-    std::string Ram(int pid, std::string root = "/");
-    std::string Uid(int pid, std::string root = "/");
-    std::string User(std::string root = "/");
-    std::string ProcessUpTime(int pid, std::string root = "/");
+// Processes
+std::string Command(int pid, std::string root = "/");
+std::string Ram(int pid, std::string root = "/");
+std::string Uid(int pid, std::string root = "/");
+std::string User(std::string root = "/");
+std::string ProcessUpTime(int pid, std::string root = "/");
 
-    // Paths
-    const std::string kProcDirectory{"proc/"};
-    const std::string kCmdlineFilename{"cmdline"};
-    const std::string kCpuinfoFilename{"/cpuinfo"};
-    const std::string kStatusFilename{"status"};
-    const std::string kStatFilename{"stat"};
-    const std::string kUptimeFilename{"uptime"};
-    const std::string kMeminfoFilename{"meminfo"};
-    const std::string kVersionFilename{"version"};
-    const std::string kOSPath{"etc/os-release"};
-    const std::string kPasswordPath{"etc/passwd"};
+// Paths
+const std::string kProcDirectory{"proc/"};
+const std::string kCmdlineFilename{"cmdline"};
+const std::string kCpuinfoFilename{"/cpuinfo"};
+const std::string kStatusFilename{"status"};
+const std::string kStatFilename{"stat"};
+const std::string kUptimeFilename{"uptime"};
+const std::string kMeminfoFilename{"meminfo"};
+const std::string kVersionFilename{"version"};
+const std::string kOSPath{"etc/os-release"};
+const std::string kPasswordPath{"etc/passwd"};
 
-  } // namespace Paths
+}  // namespace Paths
 
 };  // namespace LinuxParserPure
 

@@ -6,7 +6,7 @@
 #include <string>
 
 class ILinuxParser {
-public:
+ public:
   // System
   virtual float MemoryUtilization() const = 0;
   virtual long UpTime() const = 0;
@@ -29,11 +29,10 @@ public:
   virtual std::string Uid(int pid) const = 0;
   virtual std::string User(int pid) const = 0;
   virtual long int UpTime(int pid) const = 0;
-
 };
 
-class LinuxParser: public ILinuxParser {
-public:
+class LinuxParser : public ILinuxParser {
+ public:
   LinuxParser(std::string prefix = "");
   // System
   float MemoryUtilization() const override;
@@ -58,7 +57,7 @@ public:
   std::string User(int pid) const override;
   long int UpTime(int pid) const override;
 
-private:
+ private:
   // Paths
   const std::string kRoot;
 

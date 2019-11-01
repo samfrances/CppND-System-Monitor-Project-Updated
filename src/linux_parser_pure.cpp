@@ -1,5 +1,5 @@
-#include <string>
 #include <unistd.h>
+#include <string>
 
 #include "linux_parser_pure.h"
 
@@ -7,42 +7,41 @@ using std::string;
 
 // "Private" namespace
 namespace {
-  int ParseProcStat(std::istream& filestream, string desired_key) {
-    string line;
-    string key;
-    int value;
-    while (std::getline(filestream, line)) {
-      std::istringstream linestream(line);
-      linestream >> key >> value;
-      if (key == desired_key) {
+int ParseProcStat(std::istream& filestream, string desired_key) {
+  string line;
+  string key;
+  int value;
+  while (std::getline(filestream, line)) {
+    std::istringstream linestream(line);
+    linestream >> key >> value;
+    if (key == desired_key) {
+      return value;
+    }
+  }
+  return 0;
+}
+
+/**
+ * Parse a /proc/<pid>/status file, searching for a specified key, and
+ * return the first of the space separated values for that key, if it
+ * is a numerical string. Otherwise return "".
+ */
+string ParseProcStatusDigit(std::istream& filestream, string desired_key) {
+  string line;
+  string key;
+  string value;
+  while (std::getline(filestream, line)) {
+    std::istringstream linestream(line);
+    linestream >> key >> value;
+    if (key == desired_key + ":") {
+      if (std::all_of(value.begin(), value.end(), isdigit)) {
         return value;
       }
+      break;
     }
-    return 0;
   }
-
-  /**
-   * Parse a /proc/<pid>/status file, searching for a specified key, and
-   * return the first of the space separated values for that key, if it
-   * is a numerical string. Otherwise return "".
-   */
-  string ParseProcStatusDigit(std::istream& filestream, string desired_key) {
-    string line;
-    string key;
-    string value;
-    while (std::getline(filestream, line)) {
-      std::istringstream linestream(line);
-      linestream >> key >> value;
-      if (key == desired_key + ":") {
-        if (std::all_of(value.begin(), value.end(), isdigit)) {
-          return value;
-        }
-        break;
-      }
-    }
-    return "";
-  }
-
+  return "";
+}
 }
 
 float LinuxParserPure::MemoryUtilization(std::istream& filestream) {
@@ -59,8 +58,7 @@ float LinuxParserPure::MemoryUtilization(std::istream& filestream) {
     if (key == "MemTotal:") {
       total = value;
       totalFound = true;
-    }
-    else if (key == "MemFree:") {
+    } else if (key == "MemFree:") {
       free = value;
       freeFound = true;
     }
@@ -68,7 +66,6 @@ float LinuxParserPure::MemoryUtilization(std::istream& filestream) {
     if (totalFound && freeFound) {
       return (total - free) / total;
     }
-
   }
   return 0.0;
 }
@@ -150,11 +147,9 @@ string LinuxParserPure::Paths::Pids(std::string root) {
   return root + kProcDirectory;
 }
 
-
 string LinuxParserPure::Paths::CpuUtilization(std::string root) {
   return ProcStat(root);
 }
-
 
 // Helper method to produce the /proc/<pid>/ directory string
 string LinuxParserPure::Paths::ProcessDir(int pid, string root) {
@@ -185,7 +180,6 @@ string LinuxParserPure::Paths::Ram(int pid, std::string root) {
   return ProcessDir(pid, root) + kStatusFilename;
 }
 
-
 string LinuxParserPure::Uid(std::istream& filestream) {
   return ParseProcStatusDigit(filestream, "Uid");
 }
@@ -214,7 +208,6 @@ string LinuxParserPure::User(std::istream& filestream, string desired_uid) {
 string LinuxParserPure::Paths::User(std::string root) {
   return root + kPasswordPath;
 }
-
 
 long int LinuxParserPure::ProcessUpTime(std::istream& filestream) {
   string line;
