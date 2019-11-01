@@ -1,3 +1,6 @@
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+mkfile_dir := $(dir $(mkfile_path))
+
 .PHONY: all
 all: format test build
 
@@ -14,7 +17,7 @@ build:
 
 .PHONY: test
 test: build
-	./build/test
+	TEST_FS_ROOT=${mkfile_dir}test_filesystem_roots/one/ ./build/test
 
 .PHONY: run
 run: build
