@@ -153,6 +153,10 @@ string LinuxParserPure::Command(std::istream& filestream) {
   return "";
 }
 
+string LinuxParserPure::Paths::Command(int pid, std::string root) {
+  return root + kProcDirectory + std::to_string(pid) + "/" + kCmdlineFilename;
+}
+
 string LinuxParserPure::Ram(std::istream& filestream) {
   string value = ParseProcStatusDigit(filestream, "VmSize");
   if (value == "") {

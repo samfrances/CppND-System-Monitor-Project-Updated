@@ -46,7 +46,7 @@ namespace LinuxParserPure {
     std::string Kernel(std::string root = "/");
 
     // Processes
-    std::string Command(int pid, std::string root = "/"); // TODO
+    std::string Command(int pid, std::string root = "/");
     std::string Ram(int pid, std::string root = "/"); // TODO
     std::string Uid(int pid, std::string root = "/"); // TODO
     std::string User(int pid, std::string root = "/"); // TODO
@@ -54,7 +54,7 @@ namespace LinuxParserPure {
 
     // Paths
     const std::string kProcDirectory{"proc/"};
-    const std::string kCmdlineFilename{"/cmdline"};
+    const std::string kCmdlineFilename{"cmdline"};
     const std::string kCpuinfoFilename{"/cpuinfo"};
     const std::string kStatusFilename{"/status"};
     const std::string kStatFilename{"stat"};

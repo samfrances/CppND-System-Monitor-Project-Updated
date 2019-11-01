@@ -452,3 +452,27 @@ TEST(PathTests, RunningProcesses) {
   );
 
 }
+
+TEST(PathTests, Command) {
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::Command(5),
+    "/proc/5/cmdline"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::Command(5, "/foo/bar/"),
+    "/foo/bar/proc/5/cmdline"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::Command(5838),
+    "/proc/5838/cmdline"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::Command(5838, "/foo/bar/"),
+    "/foo/bar/proc/5838/cmdline"
+  );
+
+}
