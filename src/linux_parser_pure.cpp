@@ -162,17 +162,16 @@ std::vector<string> LinuxParserPure::CpuUtilization(std::istream& filestream) {
   return result;
 }
 
-long LinuxParserPure::Jiffies(std::istream& filestream) {
-  auto data = CpuUtilization(filestream);
-  long result = 0;
-  for (int i = 0; i <= 7; i++) {
-    result += std::stol(data.at(i));
-  }
-  return result;
-}
-
 string LinuxParserPure::Paths::CpuUtilization(std::string root) {
   return ProcStat(root);
+}
+
+long LinuxParserPure::Jiffies(std::vector<std::string> cpu_data) {
+  long result = 0;
+  for (int i = 0; i <= 7; i++) {
+    result += std::stol(cpu_data.at(i));
+  }
+  return result;
 }
 
 // Helper method to produce the /proc/<pid>/ directory string

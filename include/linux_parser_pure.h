@@ -20,10 +20,10 @@ std::string Kernel(std::istream&);
 
 // CPU
 std::vector<std::string> CpuUtilization(std::istream&);
-long Jiffies(std::istream&);                  // TODO
-long ActiveJiffies(std::istream&);            // TODO
-long ActiveJiffiesForProcess(std::istream&);  // TODO
-long IdleJiffies(std::istream&);              // TODO
+long Jiffies(std::vector<std::string>);
+long ActiveJiffies(std::vector<std::string>);  // TODO
+long ActiveJiffiesForProcess(std::istream&);   // TODO
+long IdleJiffies(std::vector<std::string>);    // TODO
 
 // Processes
 std::string Command(std::istream&);

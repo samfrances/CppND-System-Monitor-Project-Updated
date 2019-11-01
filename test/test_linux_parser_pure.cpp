@@ -184,7 +184,9 @@ TEST_F(CpuTests, CpuUtilization) {
 TEST_F(CpuTests, Jiffies) {
   long expected = 79242 + 0 + 74306 + 842486413 + 756859 + 6140 + 67701 + 0;
 
-  EXPECT_EQ(LinuxParserPure::Jiffies(proc_stat), expected);
+  EXPECT_EQ(
+      LinuxParserPure::Jiffies(LinuxParserPure::CpuUtilization(proc_stat)),
+      expected);
 }
 
 TEST(LinuxParserPureTests, Command) {
