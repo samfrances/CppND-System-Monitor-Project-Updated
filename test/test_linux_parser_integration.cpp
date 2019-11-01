@@ -69,3 +69,27 @@ TEST(LinuxParserIntegrationTest, Pids) {
     EXPECT_THAT(actual_pids, ::testing::ContainerEq(expected_pids));
   }
 }
+
+TEST(LinuxParserIntegrationTest, MemoryUtilization) {
+  {
+    LinuxParser parser(GetTestFsRoot("one"));
+
+    float expected_memfree = 1374408;
+    float expected_memtotal = 1921988;
+    float expected_utilization =
+        (expected_memtotal - expected_memfree) / expected_memtotal;
+
+    EXPECT_NEAR(parser.MemoryUtilization(), expected_utilization, 0.01);
+  }
+
+  {
+    LinuxParser parser(GetTestFsRoot("two"));
+
+    float expected_memfree = 431064;
+    float expected_memtotal = 3973736;
+    float expected_utilization =
+        (expected_memtotal - expected_memfree) / expected_memtotal;
+
+    EXPECT_NEAR(parser.MemoryUtilization(), expected_utilization, 0.01);
+  }
+}

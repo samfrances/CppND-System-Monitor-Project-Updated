@@ -52,9 +52,14 @@ vector<int> LinuxParser::Pids() const {
   return pids;
 }
 
-// TODO: Read and return the system memory utilization
 // NOTE: This is a percentage value between 0 and 1
-float LinuxParser::MemoryUtilization() const { return 0.0; }
+float LinuxParser::MemoryUtilization() const {
+  std::ifstream stream(LinuxParserPure::Paths::MemoryUtilization(kRoot));
+  if (stream.is_open()) {
+    return LinuxParserPure::MemoryUtilization(stream);
+  }
+  return 0;
+}
 
 // TODO: Read and return the system uptime
 long LinuxParser::UpTime() const { return 0; }
