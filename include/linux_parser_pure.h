@@ -19,7 +19,29 @@ std::string OperatingSystem(std::istream&);
 std::string Kernel(std::istream&);
 
 // CPU
-std::vector<std::string> CpuUtilization(std::istream&);
+class CpuUsage {
+ public:
+  CpuUsage(long user, long nice, long system, long idle, long iowait, long irq,
+           long softirq, long steal)
+      : user(user),
+        nice(nice),
+        system(system),
+        idle(idle),
+        iowait(iowait),
+        irq(irq),
+        softirq(softirq),
+        steal(steal) {}
+  const long user = 0;
+  const long nice = 0;
+  const long system = 0;
+  const long idle = 0;
+  const long iowait = 0;
+  const long irq = 0;
+  const long softirq = 0;
+  const long steal = 0;
+};
+
+CpuUsage CpuUtilization(std::istream&);
 long Jiffies(std::vector<std::string>);
 long ActiveJiffies(std::vector<std::string>);  // TODO
 long ActiveJiffiesForProcess(std::istream&);   // TODO

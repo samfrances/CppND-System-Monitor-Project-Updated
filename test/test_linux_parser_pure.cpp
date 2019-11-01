@@ -174,19 +174,16 @@ class CpuTests : public ::testing::Test {
 };
 
 TEST_F(CpuTests, CpuUtilization) {
-  std::vector<std::string> expected{"79242",  "0",    "74306", "842486413",
-                                    "756859", "6140", "67701", "0"};
+  auto usage = LinuxParserPure::CpuUtilization(proc_stat);
 
-  EXPECT_THAT(LinuxParserPure::CpuUtilization(proc_stat),
-              ::testing::ContainerEq(expected));
-}
-
-TEST_F(CpuTests, Jiffies) {
-  long expected = 79242 + 0 + 74306 + 842486413 + 756859 + 6140 + 67701 + 0;
-
-  EXPECT_EQ(
-      LinuxParserPure::Jiffies(LinuxParserPure::CpuUtilization(proc_stat)),
-      expected);
+  EXPECT_EQ(usage.user, 79242);
+  EXPECT_EQ(usage.nice, 0);
+  EXPECT_EQ(usage.system, 74306);
+  EXPECT_EQ(usage.idle, 842486413);
+  EXPECT_EQ(usage.iowait, 756859);
+  EXPECT_EQ(usage.irq, 6140);
+  EXPECT_EQ(usage.softirq, 67701);
+  EXPECT_EQ(usage.steal, 0);
 }
 
 TEST(LinuxParserPureTests, Command) {

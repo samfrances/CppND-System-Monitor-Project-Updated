@@ -148,30 +148,24 @@ string LinuxParserPure::Paths::Pids(std::string root) {
   return root + kProcDirectory;
 }
 
-std::vector<string> LinuxParserPure::CpuUtilization(std::istream& filestream) {
+LinuxParserPure::CpuUsage LinuxParserPure::CpuUtilization(
+    std::istream& filestream) {
   string line;
   string word;
-  std::vector<string> result;
+  std::vector<long> result;
   if (std::getline(filestream, line)) {
     std::istringstream linestream(line);
     linestream >> word;  // get rid of "cpu" word
     while (linestream >> word) {
-      result.push_back(word);
+      result.push_back(stol(word));
     }
   }
-  return result;
+  return CpuUsage(result.at(0), result.at(1), result.at(2), result.at(3),
+                  result.at(4), result.at(5), result.at(6), result.at(7));
 }
 
 string LinuxParserPure::Paths::CpuUtilization(std::string root) {
   return ProcStat(root);
-}
-
-long LinuxParserPure::Jiffies(std::vector<std::string> cpu_data) {
-  long result = 0;
-  for (int i = 0; i <= 7; i++) {
-    result += std::stol(cpu_data.at(i));
-  }
-  return result;
 }
 
 // Helper method to produce the /proc/<pid>/ directory string
