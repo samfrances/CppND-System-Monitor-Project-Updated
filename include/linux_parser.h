@@ -17,7 +17,8 @@ class ILinuxParser {
   virtual std::string Kernel() const = 0;
 
   // CPU
-  virtual std::vector<std::string> CpuUtilization() const = 0;  // TODO consider making private
+  virtual std::vector<std::string> CpuUtilization()
+      const = 0;  // TODO consider making private
   virtual long Jiffies() const = 0;
   virtual long ActiveJiffies() const = 0;
   virtual long ActiveJiffies(int pid) const = 0;

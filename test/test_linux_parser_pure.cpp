@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <string>
+#include <vector>
 
 #include "gmock/gmock.h"
 
@@ -131,6 +132,39 @@ TEST(LinuxParserPureTests, MemoryUtilization) {
   const float free = 505260;
   EXPECT_EQ(LinuxParserPure::MemoryUtilization(proc_meminfo),
             (total - free) / total);
+}
+
+TEST(LinuxParserPureTests, CpuUtilization) {
+  std::istringstream proc_stat(
+      "cpu 79242 0 74306 842486413 756859 6140 67701 0\n"
+      "cpu0 49663 0 40234 104757317 542691 4420 39572 0\n"
+      "cpu1 2724 0 2118 105420424 767 1719 6084 0\n"
+      "cpu2 18578 0 18430 105191522 204592 0 714 0\n"
+      "cpu3 513 0 979 105428698 739 0 2907 0\n"
+      "cpu4 1623 0 2105 105426291 444 0 3373 0\n"
+      "cpu5 3491 0 5326 105414798 7134 0 3087 0\n"
+      "cpu6 1636 0 3081 105420689 201 0 8229 0\n"
+      "cpu7 1011 0 2029 105426670 288 0 3731 0\n"
+      "intr 1139300141 1054390414 3 0 5 255 0 0 0 3 0 0 0 4 0 0 0 0 0 0 0 0 0 "
+      "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 3664020 "
+      "44569070 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 2 3702799 4393655 0 "
+      "0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 2 3480582 527155 0 0 0 0 0 0 0 "
+      "0 0 0 0 0 0 1 1 1 0 0 0 0 0 2 3445617 3870988 0 0 0 0 0 0 0 0 0 0 0 0 1 "
+      "1 1 0 0 0 0 0 6 2 4877935 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 3 2 "
+      "3445167 0 0 0 0 647 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 2 3 3481606 0 0 0 0 "
+      "0 0 0 0 0 0 0 0 2004579 1 1 1 0 0 0 0 0 2 3 3445582 0 0 0 0 0 0 0 0 0 0 "
+      "0 0 0 1 1 1 0\n"
+      "ctxt 367249552\n"
+      "btime 1310547399\n"
+      "processes 107918\n"
+      "procs_running 1\n"
+      "procs_blocked 0\n");
+
+  std::vector<std::string> expected{"79242",  "0",    "74306", "842486413",
+                                    "756859", "6140", "67701", "0"};
+
+  EXPECT_THAT(LinuxParserPure::CpuUtilization(proc_stat),
+              ::testing::ContainerEq(expected));
 }
 
 TEST(LinuxParserPureTests, Command) {

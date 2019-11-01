@@ -19,7 +19,7 @@ std::string OperatingSystem(std::istream&);
 std::string Kernel(std::istream&);
 
 // CPU
-std::vector<std::string> CpuUtilization();    // TODO
+std::vector<std::string> CpuUtilization(std::istream&);
 long Jiffies(std::istream&);                  // TODO
 long ActiveJiffies(std::istream&);            // TODO
 long ActiveJiffiesForProcess(std::istream&);  // TODO

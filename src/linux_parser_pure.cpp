@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <string>
+#include <vector>
 
 #include "linux_parser_pure.h"
 
@@ -145,6 +146,20 @@ string LinuxParserPure::Paths::Kernel(std::string root) {
 
 string LinuxParserPure::Paths::Pids(std::string root) {
   return root + kProcDirectory;
+}
+
+std::vector<string> LinuxParserPure::CpuUtilization(std::istream& filestream) {
+  string line;
+  string word;
+  std::vector<string> result;
+  if (std::getline(filestream, line)) {
+    std::istringstream linestream(line);
+    linestream >> word;  // get rid of "cpu" word
+    while (linestream >> word) {
+      result.push_back(word);
+    }
+  }
+  return result;
 }
 
 string LinuxParserPure::Paths::CpuUtilization(std::string root) {
