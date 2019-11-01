@@ -72,6 +72,10 @@ float LinuxParserPure::MemoryUtilization(std::istream& filestream) {
   return 0.0;
 }
 
+string LinuxParserPure::Paths::MemoryUtilization(std::string root) {
+  return root + kProcDirectory + kMeminfoFilename;
+}
+
 long LinuxParserPure::UpTime(std::istream& filestream) {
   long uptime;
   string line;

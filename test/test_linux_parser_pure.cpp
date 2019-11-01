@@ -396,3 +396,17 @@ TEST(PathTests, Pids) {
     "/foo/bar/proc/"
   );
 }
+
+TEST(PathTests, MemoryUtilization) {
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::MemoryUtilization(),
+    "/proc/meminfo"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::MemoryUtilization("/foo/bar/"),
+    "/foo/bar/proc/meminfo"
+  );
+
+}
