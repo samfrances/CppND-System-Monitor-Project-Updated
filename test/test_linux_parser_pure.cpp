@@ -453,6 +453,13 @@ TEST(PathTests, RunningProcesses) {
 
 }
 
+TEST(PathTests, CpuUtilization) {
+  EXPECT_EQ(LinuxParserPure::Paths::CpuUtilization(), "/proc/stat");
+
+  EXPECT_EQ(LinuxParserPure::Paths::CpuUtilization("/foo/bar/"),
+            "/foo/bar/proc/stat");
+}
+
 TEST(PathTests, Command) {
 
   EXPECT_EQ(

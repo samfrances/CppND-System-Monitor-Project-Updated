@@ -35,6 +35,10 @@ namespace LinuxParserPure {
   // Paths of system files
   namespace Paths {
 
+    // Helpers
+    std::string ProcessDir(int pid, std::string root);
+    std::string ProcStat(std::string root = "/");
+
     // System
     std::string MemoryUtilization(std::string root = "/");
     std::string UpTime(std::string root = "/");
@@ -44,10 +48,10 @@ namespace LinuxParserPure {
     std::string OperatingSystem(std::string root = "/");
     std::string Kernel(std::string root = "/");
 
-    // TODO CPU Paths
+    // CPU
+    std::string CpuUtilization(std::string root = "/");
 
     // Processes
-    std::string ProcessDir(int pid, std::string root);
     std::string Command(int pid, std::string root = "/");
     std::string Ram(int pid, std::string root = "/");
     std::string Uid(int pid, std::string root = "/");

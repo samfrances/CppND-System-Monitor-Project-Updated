@@ -94,8 +94,12 @@ int LinuxParserPure::TotalProcesses(std::istream& filestream) {
   return ParseProcStat(filestream, "processes");
 }
 
-string LinuxParserPure::Paths::TotalProcesses(std::string root) {
+string LinuxParserPure::Paths::ProcStat(std::string root) {
   return root + kProcDirectory + kStatFilename;
+}
+
+string LinuxParserPure::Paths::TotalProcesses(std::string root) {
+  return ProcStat(root);
 }
 
 int LinuxParserPure::RunningProcesses(std::istream& filestream) {
@@ -103,7 +107,7 @@ int LinuxParserPure::RunningProcesses(std::istream& filestream) {
 }
 
 string LinuxParserPure::Paths::RunningProcesses(std::string root) {
-  return root + kProcDirectory + kStatFilename;
+  return ProcStat(root);
 }
 
 string LinuxParserPure::OperatingSystem(std::istream& filestream) {
@@ -145,6 +149,12 @@ string LinuxParserPure::Paths::Kernel(std::string root) {
 string LinuxParserPure::Paths::Pids(std::string root) {
   return root + kProcDirectory;
 }
+
+
+string LinuxParserPure::Paths::CpuUtilization(std::string root) {
+  return ProcStat(root);
+}
+
 
 // Helper method to produce the /proc/<pid>/ directory string
 string LinuxParserPure::Paths::ProcessDir(int pid, string root) {
