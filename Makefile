@@ -17,7 +17,7 @@ build:
 
 .PHONY: test
 test: build
-	TEST_FS_ROOT=${mkfile_dir}test_filesystem_roots/one/ ./build/test
+	TEST_FS_ROOT=${mkfile_dir}test_data/test_filesystem_roots/ ./build/test
 
 .PHONY: run
 run: build
