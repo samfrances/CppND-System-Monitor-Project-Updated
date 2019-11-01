@@ -85,6 +85,10 @@ long LinuxParserPure::UpTime(std::istream& filestream) {
   return uptime;
 }
 
+string LinuxParserPure::Paths::UpTime(std::string root) {
+  return root + kProcDirectory + kUptimeFilename;
+}
+
 int LinuxParserPure::TotalProcesses(std::istream& filestream) {
   return ParseProcStat(filestream, "processes");
 }

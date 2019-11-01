@@ -38,7 +38,7 @@ namespace LinuxParserPure {
 
     // System
     std::string MemoryUtilization(std::string root = "/");
-    std::string UpTime(std::string root = "/"); // TODO
+    std::string UpTime(std::string root = "/");
     std::string Pids(std::string root = "/");
     std::string TotalProcesses(std::string root = "/"); // TODO
     std::string RunningProcesses(std::string root = "/"); // TODO
@@ -58,7 +58,7 @@ namespace LinuxParserPure {
     const std::string kCpuinfoFilename{"/cpuinfo"};
     const std::string kStatusFilename{"/status"};
     const std::string kStatFilename{"/stat"};
-    const std::string kUptimeFilename{"/uptime"};
+    const std::string kUptimeFilename{"uptime"};
     const std::string kMeminfoFilename{"meminfo"};
     const std::string kVersionFilename{"version"};
     const std::string kOSPath{"etc/os-release"};

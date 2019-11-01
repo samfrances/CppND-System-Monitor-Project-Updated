@@ -410,3 +410,17 @@ TEST(PathTests, MemoryUtilization) {
   );
 
 }
+
+TEST(PathTests, UpTime) {
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::UpTime(),
+    "/proc/uptime"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::UpTime("/foo/bar/"),
+    "/foo/bar/proc/uptime"
+  );
+
+}
