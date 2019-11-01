@@ -111,3 +111,10 @@ TEST(LinuxParserIntegrationTest, UpTime) {
     EXPECT_EQ(parser.UpTime(), expected);
   }
 }
+
+TEST(LinuxParserIntegrationTest, ActiveJiffies_Pid) {
+  LinuxParser parser(GetTestFsRoot("one"));
+
+  long expected = 582 + 205;
+  EXPECT_EQ(parser.ActiveJiffies(490), expected);
+}

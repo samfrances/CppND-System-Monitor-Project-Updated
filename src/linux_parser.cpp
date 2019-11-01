@@ -74,9 +74,16 @@ long LinuxParser::UpTime() const {
 // TODO: Consider removing
 long LinuxParser::Jiffies() const { return 0; }
 
-// TODO: Read and return the number of active jiffies for a PID
+// DONE: Read and return the number of active jiffies for a PID
 // REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::ActiveJiffies(int pid[[maybe_unused]]) const { return 0; }
+long LinuxParser::ActiveJiffies(int pid) const {
+  std::ifstream stream(
+      LinuxParserPure::Paths::ActiveJiffiesForProcess(pid, kRoot));
+  if (stream.is_open()) {
+    return LinuxParserPure::ActiveJiffiesForProcess(stream);
+  }
+  return 0;
+}
 
 // TODO: Read and return the number of active jiffies for the system
 // TODO: Consider removing
