@@ -395,8 +395,7 @@ TEST(LinuxParserPureTests, ActiveJiffiesForProcess) {
       "18446744073709551615 0 0 17 1 0 0 0 0 0 13147640 13322176 25554944 "
       "140727040249523 140727040249749 140727040249749 140727040249821 0");
 
-  EXPECT_EQ(LinuxParserPure::ActiveJiffiesForProcess(proc_pid_stat),
-            561 + 205);
+  EXPECT_EQ(LinuxParserPure::ActiveJiffiesForProcess(proc_pid_stat), 561 + 205);
 }
 
 TEST(PathTests, OperatingSystem) {
