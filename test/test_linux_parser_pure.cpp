@@ -278,7 +278,7 @@ TEST(LinuxParserPureTests, User) {
   }
 }
 
-TEST(LinuxParserPureTests, Uptime) {
+TEST(LinuxParserPureTests, ProcessUpTime) {
   std::stringstream proc_pid_stat(
       "972 (docker-containe) S 901 972 972 0 -1 1077944576 2657 0 2 0 561 205 "
       "0 0 20 0 11 0 1820 441688064 2327 18446744073709551615 4194304 11049596 "
