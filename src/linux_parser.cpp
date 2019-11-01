@@ -52,6 +52,7 @@ vector<int> LinuxParser::Pids() const {
   return pids;
 }
 
+// DONE: Read and return the system memory utilization
 // NOTE: This is a percentage value between 0 and 1
 float LinuxParser::MemoryUtilization() const {
   std::ifstream stream(LinuxParserPure::Paths::MemoryUtilization(kRoot));
