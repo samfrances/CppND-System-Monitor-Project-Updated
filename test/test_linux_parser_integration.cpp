@@ -29,3 +29,17 @@ TEST(LinuxParserIntegrationTest, OperatingSystem) {
     EXPECT_EQ(parser.OperatingSystem(), "Debian GNU/Linux jessie/sid");
   }
 }
+
+TEST(LinuxParserIntegrationTest, Kernel) {
+  {
+    LinuxParser parser(GetTestFsRoot("one"));
+
+    EXPECT_EQ(parser.Kernel(), "2.6.18-92.el5");
+  }
+
+  {
+    LinuxParser parser(GetTestFsRoot("two"));
+
+    EXPECT_EQ(parser.Kernel(), "3.6.8-1.523");
+  }
+}
