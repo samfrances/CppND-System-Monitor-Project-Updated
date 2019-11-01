@@ -62,7 +62,7 @@ float LinuxParser::MemoryUtilization() const {
   return 0;
 }
 
-// TODO: Read and return the system uptime
+// DONE: Read and return the system uptime
 long LinuxParser::UpTime() const {
   std::ifstream stream(LinuxParserPure::Paths::UpTime(kRoot));
   if (stream.is_open()) {
