@@ -201,6 +201,11 @@ string LinuxParserPure::User(std::istream& filestream, string desired_uid) {
   return "";
 }
 
+string LinuxParserPure::Paths::User(std::string root) {
+  return root + kPasswordPath;
+}
+
+
 long int LinuxParserPure::ProcessUpTime(std::istream& filestream) {
   string line;
   if (std::getline(filestream, line)) {

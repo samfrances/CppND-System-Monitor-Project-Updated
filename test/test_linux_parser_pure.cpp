@@ -524,3 +524,17 @@ TEST(PathTests, Uid) {
   );
 
 }
+
+TEST(PathTests, User) {
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::User(),
+    "/etc/passwd"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::User("/bar/baz/"),
+    "/bar/baz/etc/passwd"
+  );
+
+}

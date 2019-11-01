@@ -50,7 +50,7 @@ namespace LinuxParserPure {
     std::string Command(int pid, std::string root = "/");
     std::string Ram(int pid, std::string root = "/");
     std::string Uid(int pid, std::string root = "/");
-    std::string User(int pid, std::string root = "/"); // TODO
+    std::string User(std::string root = "/");
     std::string UpTime(int pid, std::string root = "/"); // TODO
 
     // Paths
@@ -63,7 +63,7 @@ namespace LinuxParserPure {
     const std::string kMeminfoFilename{"meminfo"};
     const std::string kVersionFilename{"version"};
     const std::string kOSPath{"etc/os-release"};
-    const std::string kPasswordPath{"/etc/passwd"};
+    const std::string kPasswordPath{"etc/passwd"};
 
   } // namespace Paths
 
