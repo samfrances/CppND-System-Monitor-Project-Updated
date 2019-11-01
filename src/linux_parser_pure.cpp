@@ -168,6 +168,16 @@ string LinuxParserPure::Paths::CpuUtilization(std::string root) {
   return ProcStat(root);
 }
 
+long LinuxParserPure::CpuUsage::Jiffies() {
+  return user + nice + system + idle + iowait + irq + softirq + steal;
+}
+
+long LinuxParserPure::CpuUsage::IdleJiffies() { return idle + iowait; }
+
+long LinuxParserPure::CpuUsage::ActiveJiffies() {
+  return Jiffies() - IdleJiffies();
+}
+
 // Helper method to produce the /proc/<pid>/ directory string
 string LinuxParserPure::Paths::ProcessDir(int pid, string root) {
   return root + kProcDirectory + std::to_string(pid) + "/";

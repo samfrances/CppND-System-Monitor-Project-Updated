@@ -40,9 +40,9 @@ class CpuUsage {
   const long softirq = 0;
   const long steal = 0;
 
-  long Jiffies();        // TODO
-  long ActiveJiffies();  // TODO
-  long IdleJiffies();    // TODO
+  long Jiffies();
+  long ActiveJiffies();
+  long IdleJiffies();
 };
 
 CpuUsage CpuUtilization(std::istream&);
