@@ -65,6 +65,7 @@ float LinuxParser::MemoryUtilization() const {
 long LinuxParser::UpTime() const { return 0; }
 
 // TODO: Read and return the number of jiffies for the system
+// TODO: Consider removing
 long LinuxParser::Jiffies() const { return 0; }
 
 // TODO: Read and return the number of active jiffies for a PID
@@ -72,9 +73,11 @@ long LinuxParser::Jiffies() const { return 0; }
 long LinuxParser::ActiveJiffies(int pid[[maybe_unused]]) const { return 0; }
 
 // TODO: Read and return the number of active jiffies for the system
+// TODO: Consider removing
 long LinuxParser::ActiveJiffies() const { return 0; }
 
 // TODO: Read and return the number of idle jiffies for the system
+// TODO: Consider removing
 long LinuxParser::IdleJiffies() const { return 0; }
 
 // TODO: Read and return CPU utilization
