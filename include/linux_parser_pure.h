@@ -1,7 +1,3 @@
-/**
- * Pure parsing methods, without any file IO
- */
-
 #ifndef SYSTEM_PARSER_PURE_H
 #define SYSTEM_PARSER_PURE_H
 
@@ -9,6 +5,9 @@
 #include <regex>
 #include <string>
 
+/**
+ * Pure parsing methods, without any file IO
+ */
 namespace LinuxParserPure {
 
   // System
