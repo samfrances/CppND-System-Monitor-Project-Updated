@@ -20,10 +20,10 @@ class ILinuxParser {
 
   // CPU
   virtual LinuxParserPure::CpuUtilizationSnapshot CpuUtilization() const = 0;
-  virtual long Jiffies() const = 0;
-  virtual long ActiveJiffies() const = 0;
+  virtual long Jiffies() const = 0;        // TODO consider deleting
+  virtual long ActiveJiffies() const = 0;  // TODO consider deleting
   virtual long ActiveJiffies(int pid) const = 0;
-  virtual long IdleJiffies() const = 0;
+  virtual long IdleJiffies() const = 0;  // TODO consider deleting
 
   // Processes
   virtual std::string Command(int pid) const = 0;
