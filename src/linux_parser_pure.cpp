@@ -101,6 +101,10 @@ int LinuxParserPure::RunningProcesses(std::istream& filestream) {
   return ParseProcStat(filestream, "procs_running");
 }
 
+string LinuxParserPure::Paths::RunningProcesses(std::string root) {
+  return root + kProcDirectory + kStatFilename;
+}
+
 string LinuxParserPure::OperatingSystem(std::istream& filestream) {
   string key;
   string value;

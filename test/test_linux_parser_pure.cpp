@@ -438,3 +438,17 @@ TEST(PathTests, TotalProcesses) {
   );
 
 }
+
+TEST(PathTests, RunningProcesses) {
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::RunningProcesses(),
+    "/proc/stat"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::RunningProcesses("/foo/bar/"),
+    "/foo/bar/proc/stat"
+  );
+
+}
