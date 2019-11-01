@@ -387,6 +387,18 @@ TEST(LinuxParserPureTests, ProcessUpTime) {
             1820L / sysconf(_SC_CLK_TCK));
 }
 
+TEST(LinuxParserPureTests, ActiveJiffiesForProcess) {
+  std::stringstream proc_pid_stat(
+      "972 (docker-containe) S 901 972 972 0 -1 1077944576 2657 0 2 0 561 205 "
+      "0 0 20 0 11 0 1820 441688064 2327 18446744073709551615 4194304 11049596 "
+      "140727040242048 140727040241432 4602915 0 2079995941 0 2143420159 "
+      "18446744073709551615 0 0 17 1 0 0 0 0 0 13147640 13322176 25554944 "
+      "140727040249523 140727040249749 140727040249749 140727040249821 0");
+
+  EXPECT_EQ(LinuxParserPure::ActiveJiffiesForProcess(proc_pid_stat),
+            561 + 205);
+}
+
 TEST(PathTests, OperatingSystem) {
   EXPECT_EQ(LinuxParserPure::Paths::OperatingSystem(), "/etc/os-release");
 

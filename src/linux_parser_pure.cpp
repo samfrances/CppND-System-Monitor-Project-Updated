@@ -277,3 +277,23 @@ long int LinuxParserPure::ProcessUpTime(std::istream& filestream) {
 string LinuxParserPure::Paths::ProcessUpTime(int pid, std::string root) {
   return ProcessDir(pid, root) + kStatFilename;
 }
+
+long int LinuxParserPure::ActiveJiffiesForProcess(std::istream& filestream) {
+  string line;
+  if (std::getline(filestream, line)) {
+    long utime = 0;
+    long stime = 0;
+    string garbage;
+    std::istringstream contents(line);
+    for (int i = 1; i <= 15; i++) {
+      if (i == 14) {
+        contents >> utime;
+      } else if (i == 15) {
+        contents >> stime;
+      } else {
+        contents >> garbage;
+      }
+    }
+    return utime + stime;
+  }
+}

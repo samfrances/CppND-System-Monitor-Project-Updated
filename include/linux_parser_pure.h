@@ -39,7 +39,6 @@ class CpuUtilizationSnapshot {
 };
 
 CpuUtilizationSnapshot CpuUtilization(std::istream&);
-long ActiveJiffiesForProcess(std::istream&);  // TODO
 
 // Processes
 std::string Command(std::istream&);
@@ -47,6 +46,7 @@ std::string Ram(std::istream&);
 std::string Uid(std::istream&);
 std::string User(std::istream&, std::string uid);
 long int ProcessUpTime(std::istream&);
+long ActiveJiffiesForProcess(std::istream&);
 
 // Paths of system files
 namespace Paths {
