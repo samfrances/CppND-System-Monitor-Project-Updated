@@ -538,3 +538,27 @@ TEST(PathTests, User) {
   );
 
 }
+
+TEST(PathTests, ProcessUpTime) {
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::ProcessUpTime(35),
+    "/proc/35/stat"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::ProcessUpTime(35, "/foo/bar/"),
+    "/foo/bar/proc/35/stat"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::ProcessUpTime(198),
+    "/proc/198/stat"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::ProcessUpTime(198, "/foo/bar/"),
+    "/foo/bar/proc/198/stat"
+  );
+
+}

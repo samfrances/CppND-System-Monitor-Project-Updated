@@ -51,7 +51,7 @@ namespace LinuxParserPure {
     std::string Ram(int pid, std::string root = "/");
     std::string Uid(int pid, std::string root = "/");
     std::string User(std::string root = "/");
-    std::string UpTime(int pid, std::string root = "/"); // TODO
+    std::string ProcessUpTime(int pid, std::string root = "/");
 
     // Paths
     const std::string kProcDirectory{"proc/"};

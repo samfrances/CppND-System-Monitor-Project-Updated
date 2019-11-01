@@ -217,3 +217,7 @@ long int LinuxParserPure::ProcessUpTime(std::istream& filestream) {
     return stol(starttime) / sysconf(_SC_CLK_TCK);
   }
 }
+
+string LinuxParserPure::Paths::ProcessUpTime(int pid, std::string root) {
+  return ProcessDir(pid, root) + kStatFilename;
+}
