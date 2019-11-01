@@ -39,13 +39,14 @@ class CpuUsage {
   const long irq = 0;
   const long softirq = 0;
   const long steal = 0;
+
+  long Jiffies();        // TODO
+  long ActiveJiffies();  // TODO
+  long IdleJiffies();    // TODO
 };
 
 CpuUsage CpuUtilization(std::istream&);
-long Jiffies(std::vector<std::string>);
-long ActiveJiffies(std::vector<std::string>);  // TODO
-long ActiveJiffiesForProcess(std::istream&);   // TODO
-long IdleJiffies(std::vector<std::string>);    // TODO
+long ActiveJiffiesForProcess(std::istream&);  // TODO
 
 // Processes
 std::string Command(std::istream&);
