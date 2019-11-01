@@ -3,7 +3,8 @@
 #include "system.h"
 
 int main() {
-  LinuxParser parser("/");
+  LinuxParser parser(
+      "/");  // TODO see if we can do without specifying the root here
   System system(parser);
   NCursesDisplay::Display(system);
 }
