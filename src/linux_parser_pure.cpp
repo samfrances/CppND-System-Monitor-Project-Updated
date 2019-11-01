@@ -93,6 +93,10 @@ int LinuxParserPure::TotalProcesses(std::istream& filestream) {
   return ParseProcStat(filestream, "processes");
 }
 
+string LinuxParserPure::Paths::TotalProcesses(std::string root) {
+  return root + kProcDirectory + kStatFilename;
+}
+
 int LinuxParserPure::RunningProcesses(std::istream& filestream) {
   return ParseProcStat(filestream, "procs_running");
 }

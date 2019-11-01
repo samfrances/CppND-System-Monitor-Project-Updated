@@ -424,3 +424,17 @@ TEST(PathTests, UpTime) {
   );
 
 }
+
+TEST(PathTests, TotalProcesses) {
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::TotalProcesses(),
+    "/proc/stat"
+  );
+
+  EXPECT_EQ(
+    LinuxParserPure::Paths::TotalProcesses("/foo/bar/"),
+    "/foo/bar/proc/stat"
+  );
+
+}
