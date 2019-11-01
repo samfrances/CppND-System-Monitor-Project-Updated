@@ -7,7 +7,7 @@
 #include "format.h"
 #include "linux_parser_pure.h"
 
-TEST(LinuxParserPureTests, TestOperatingSystem) {
+TEST(LinuxParserPureTests, OperatingSystem) {
   std::string etc_os_release =
       "NAME=\"Ubuntu\"\n"
       "VERSION=\"16.04.6 LTS (Xenial Xerus)\"\n"
@@ -28,7 +28,7 @@ TEST(LinuxParserPureTests, TestOperatingSystem) {
   EXPECT_EQ(result, "Ubuntu 16.04.6 LTS");
 }
 
-TEST(LinuxParserPureTests, TestOperatingSystem_NotFound) {
+TEST(LinuxParserPureTests, OperatingSystem_NotFound) {
   std::string etc_os_release =
       "NAME=\"Ubuntu\"\n"
       "VERSION=\"16.04.6 LTS (Xenial Xerus)\"\n"
@@ -49,7 +49,7 @@ TEST(LinuxParserPureTests, TestOperatingSystem_NotFound) {
   EXPECT_EQ(result, "");
 }
 
-TEST(LinuxParserPureTests, TestKernel) {
+TEST(LinuxParserPureTests, Kernel) {
   std::string proc_version =
       "Linux version 4.15.0-66-generic (buildd@lgw01-amd64-050) (gcc version "
       "5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #75~16.04.1-Ubuntu SMP "
