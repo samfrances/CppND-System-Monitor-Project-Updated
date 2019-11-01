@@ -297,3 +297,8 @@ long int LinuxParserPure::ActiveJiffiesForProcess(std::istream& filestream) {
     return utime + stime;
   }
 }
+
+string LinuxParserPure::Paths::ActiveJiffiesForProcess(int pid,
+                                                       std::string root) {
+  return ProcessDir(pid, root) + kStatFilename;
+}
