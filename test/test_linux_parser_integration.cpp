@@ -150,3 +150,31 @@ TEST(LinuxParserIntegrationTest, CpuUtilization) {
     EXPECT_EQ(usage.steal, 0);
   }
 }
+
+TEST(LinuxParserIntegrationTest, TotalProcesses) {
+  {
+    LinuxParser parser(GetTestFsRoot("one"));
+
+    EXPECT_EQ(parser.TotalProcesses(), 21905);
+  }
+
+  {
+    LinuxParser parser(GetTestFsRoot("two"));
+
+    EXPECT_EQ(parser.TotalProcesses(), 8483);
+  }
+}
+
+TEST(LinuxParserIntegrationTest, RunningProcesses) {
+  {
+    LinuxParser parser(GetTestFsRoot("one"));
+
+    EXPECT_EQ(parser.RunningProcesses(), 1);
+  }
+
+  {
+    LinuxParser parser(GetTestFsRoot("two"));
+
+    EXPECT_EQ(parser.RunningProcesses(), 15);
+  }
+}

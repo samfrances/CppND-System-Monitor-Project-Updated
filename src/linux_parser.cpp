@@ -103,11 +103,23 @@ LinuxParserPure::CpuUtilizationSnapshot LinuxParser::CpuUtilization() const {
   return {};
 }
 
-// TODO: Read and return the total number of processes
-int LinuxParser::TotalProcesses() const { return 0; }
+// DONE: Read and return the total number of processes
+int LinuxParser::TotalProcesses() const {
+  std::ifstream stream(LinuxParserPure::Paths::TotalProcesses(kRoot));
+  if (stream.is_open()) {
+    return LinuxParserPure::TotalProcesses(stream);
+  }
+  return 0;
+}
 
-// TODO: Read and return the number of running processes
-int LinuxParser::RunningProcesses() const { return 0; }
+// DONE: Read and return the number of running processes
+int LinuxParser::RunningProcesses() const {
+  std::ifstream stream(LinuxParserPure::Paths::RunningProcesses(kRoot));
+  if (stream.is_open()) {
+    return LinuxParserPure::RunningProcesses(stream);
+  }
+  return 0;
+}
 
 // TODO: Read and return the command associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
