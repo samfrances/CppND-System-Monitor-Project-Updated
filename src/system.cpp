@@ -33,8 +33,8 @@ std::string System::OperatingSystem() { return parser.OperatingSystem(); }
 // DONE: Return the number of processes actively running on the system
 int System::RunningProcesses() { return parser.RunningProcesses(); }
 
-// TODO: Return the total number of processes on the system
-int System::TotalProcesses() { return 0; }
+// DONE: Return the total number of processes on the system
+int System::TotalProcesses() { return parser.TotalProcesses(); }
 
 // TODO: Return the number of seconds since the system started running
 long int System::UpTime() { return 0; }
