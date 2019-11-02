@@ -118,3 +118,35 @@ TEST(LinuxParserIntegrationTest, ActiveJiffies_Pid) {
   long expected = 582 + 205;
   EXPECT_EQ(parser.ActiveJiffies(490), expected);
 }
+
+TEST(LinuxParserIntegrationTest, CpuUtilization) {
+  {
+    LinuxParser parser(GetTestFsRoot("one"));
+
+    auto usage = parser.CpuUtilization();
+
+    EXPECT_EQ(usage.user, 209841);
+    EXPECT_EQ(usage.nice, 1554);
+    EXPECT_EQ(usage.system, 21720);
+    EXPECT_EQ(usage.idle, 118519346);
+    EXPECT_EQ(usage.iowait, 72939);
+    EXPECT_EQ(usage.irq, 154);
+    EXPECT_EQ(usage.softirq, 27168);
+    EXPECT_EQ(usage.steal, 12);
+  }
+
+  {
+    LinuxParser parser(GetTestFsRoot("two"));
+
+    auto usage = parser.CpuUtilization();
+
+    EXPECT_EQ(usage.user, 57226);
+    EXPECT_EQ(usage.nice, 1340);
+    EXPECT_EQ(usage.system, 12610);
+    EXPECT_EQ(usage.idle, 1319920);
+    EXPECT_EQ(usage.iowait, 1981);
+    EXPECT_EQ(usage.irq, 0);
+    EXPECT_EQ(usage.softirq, 864);
+    EXPECT_EQ(usage.steal, 0);
+  }
+}

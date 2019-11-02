@@ -94,8 +94,12 @@ long LinuxParser::ActiveJiffies() const { return 0; }
 // TODO: Consider removing
 long LinuxParser::IdleJiffies() const { return 0; }
 
-// TODO: Read and return CPU utilization
+// DONE: Read and return CPU utilization
 LinuxParserPure::CpuUtilizationSnapshot LinuxParser::CpuUtilization() const {
+  std::ifstream stream(LinuxParserPure::Paths::CpuUtilization(kRoot));
+  if (stream.is_open()) {
+    return LinuxParserPure::CpuUtilization(stream);
+  }
   return {};
 }
 
