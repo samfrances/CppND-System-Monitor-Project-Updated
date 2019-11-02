@@ -1,7 +1,10 @@
 #include "gmock/gmock.h"
 
+#include "system.h"
 #include "linux_parser.h"
 #include "linux_parser_pure.h"
+
+using ::testing::Return;
 
 class MockParser : public ILinuxParser {
  public:
@@ -29,6 +32,22 @@ class MockParser : public ILinuxParser {
   MOCK_METHOD(long int, UpTime, (int pid), (const, override));
 };
 
-TEST(System, Bar) {
+TEST(System, MemoryUtilization) {
   MockParser parser;
+  System system(parser);
+
+  std::vector<float> expectations{0.72, 0.1, 1.0, 0};
+
+  for (const float expected: expectations) {
+
+    ON_CALL(parser, MemoryUtilization())
+    .WillByDefault(Return(expected));
+
+    EXPECT_CALL(parser, MemoryUtilization())
+      .Times(1);
+
+    EXPECT_EQ(system.MemoryUtilization(), expected);
+
+  }
+
 }
