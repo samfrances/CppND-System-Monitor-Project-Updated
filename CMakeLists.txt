@@ -25,8 +25,10 @@ add_executable(test
     test/test_tests.cpp
     test/test_linux_parser_pure.cpp
     test/test_linux_parser_integration.cpp
+    test/test_format.cpp
     src/linux_parser_pure.cpp
-    src/linux_parser.cpp)
+    src/linux_parser.cpp
+    src/format.cpp)
 
 target_link_libraries(test gmock_main)
 
