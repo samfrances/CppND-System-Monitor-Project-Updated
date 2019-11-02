@@ -131,8 +131,13 @@ string LinuxParser::Command(int pid) const {
 }
 
 // TODO: Read and return the memory used by a process
-// REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Ram(int pid[[maybe_unused]]) const { return string(); }
+string LinuxParser::Ram(int pid) const {
+  std::ifstream stream(LinuxParserPure::Paths::Ram(pid, kRoot));
+  if (stream.is_open()) {
+    return LinuxParserPure::Ram(stream);
+  }
+  return "";
+}
 
 // TODO: Read and return the user ID associated with a process
 // REMOVE: [[maybe_unused]] once you define the function

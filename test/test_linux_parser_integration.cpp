@@ -197,3 +197,21 @@ TEST(LinuxParserIntegrationTest, Command) {
     EXPECT_EQ(parser.Command(4482), "/usr/lib/slack/slack");
   }
 }
+
+TEST(LinuxParserIntegrationTest, Ram) {
+  {
+    LinuxParser parser(GetTestFsRoot("one"));
+
+    EXPECT_EQ(parser.Ram(490), std::to_string(349723485.0 / 1024.0));
+
+    EXPECT_EQ(parser.Ram(83), std::to_string(4443.0 / 1024.0));
+
+    EXPECT_EQ(parser.Ram(111), "");
+  }
+
+  {
+    LinuxParser parser(GetTestFsRoot("two"));
+
+    EXPECT_EQ(parser.Ram(4482), std::to_string(443743.0 / 1024.0));
+  }
+}
