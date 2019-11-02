@@ -1,8 +1,8 @@
 #include "gmock/gmock.h"
 
-#include "system.h"
 #include "linux_parser.h"
 #include "linux_parser_pure.h"
+#include "system.h"
 
 using ::testing::Return;
 
@@ -18,11 +18,14 @@ class MockParser : public ILinuxParser {
   MOCK_METHOD(std::string, Kernel, (), (const, override));
 
   // CPU
-  MOCK_METHOD(LinuxParserPure::CpuUtilizationSnapshot, CpuUtilization, (), (const, override));
-  MOCK_METHOD(long, Jiffies, (), (const, override));        // TODO consider deleting
-  MOCK_METHOD(long, ActiveJiffies, (), (const, override));  // TODO consider deleting
+  MOCK_METHOD(LinuxParserPure::CpuUtilizationSnapshot, CpuUtilization, (),
+              (const, override));
+  MOCK_METHOD(long, Jiffies, (), (const, override));  // TODO consider deleting
+  MOCK_METHOD(long, ActiveJiffies, (),
+              (const, override));  // TODO consider deleting
   MOCK_METHOD(long, ActiveJiffies, (int pid), (const, override));
-  MOCK_METHOD(long, IdleJiffies, (), (const, override));  // TODO consider deleting
+  MOCK_METHOD(long, IdleJiffies, (),
+              (const, override));  // TODO consider deleting
 
   // Processes
   MOCK_METHOD(std::string, Command, (int pid), (const, override));
@@ -38,16 +41,11 @@ TEST(System, MemoryUtilization) {
 
   std::vector<float> expectations{0.72, 0.1, 1.0, 0};
 
-  for (const float expected: expectations) {
+  for (const float expected : expectations) {
+    ON_CALL(parser, MemoryUtilization()).WillByDefault(Return(expected));
 
-    ON_CALL(parser, MemoryUtilization())
-    .WillByDefault(Return(expected));
-
-    EXPECT_CALL(parser, MemoryUtilization())
-      .Times(1);
+    EXPECT_CALL(parser, MemoryUtilization()).Times(1);
 
     EXPECT_EQ(system.MemoryUtilization(), expected);
-
   }
-
 }
