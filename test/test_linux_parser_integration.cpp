@@ -178,3 +178,22 @@ TEST(LinuxParserIntegrationTest, RunningProcesses) {
     EXPECT_EQ(parser.RunningProcesses(), 15);
   }
 }
+
+TEST(LinuxParserIntegrationTest, Command) {
+  {
+    LinuxParser parser(GetTestFsRoot("one"));
+
+    EXPECT_EQ(parser.Command(490),
+              "/usr/lib/chromium-browser/chromium-browser --enable-pinch");
+
+    EXPECT_EQ(parser.Command(83), "/usr/sbin/clamd --foreground=true");
+
+    EXPECT_EQ(parser.Command(111), "");
+  }
+
+  {
+    LinuxParser parser(GetTestFsRoot("two"));
+
+    EXPECT_EQ(parser.Command(4482), "/usr/lib/slack/slack");
+  }
+}
