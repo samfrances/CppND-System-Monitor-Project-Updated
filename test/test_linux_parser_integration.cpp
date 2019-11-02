@@ -215,3 +215,21 @@ TEST(LinuxParserIntegrationTest, Ram) {
     EXPECT_EQ(parser.Ram(4482), std::to_string(443743.0 / 1024.0));
   }
 }
+
+TEST(LinuxParserIntegrationTest, Uid) {
+  {
+    LinuxParser parser(GetTestFsRoot("one"));
+
+    EXPECT_EQ(parser.Uid(490), "1000");
+
+    EXPECT_EQ(parser.Uid(83), "837");
+
+    EXPECT_EQ(parser.Uid(111), "");
+  }
+
+  {
+    LinuxParser parser(GetTestFsRoot("two"));
+
+    EXPECT_EQ(parser.Uid(4482), "1000");
+  }
+}

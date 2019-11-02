@@ -6,7 +6,7 @@ Ngid:   0
 Pid:    17248
 PPid:   17200
 TracerPid:      0
-Uid:    1000    1000    1000    1000
+Uid:    837     1000    1000    1000
 Gid:    100     100     100     100
 FDSize: 256
 Groups: 16 33 100
