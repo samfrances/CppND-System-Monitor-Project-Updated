@@ -11,7 +11,7 @@
 class System {
  public:
   System(const ILinuxParser& parser);
-  Processor& Cpu();                   // TODO: See src/system.cpp
+  IProcessor& Cpu();                   // TODO: See src/system.cpp
   std::vector<Process>& Processes();  // TODO: See src/system.cpp
   float MemoryUtilization();
   long UpTime();
