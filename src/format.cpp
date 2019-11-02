@@ -7,7 +7,6 @@ using std::string;
 // INPUT: Long int measuring seconds
 // OUTPUT: HH:MM:SS
 string Format::ElapsedTime(long seconds) {
-
   long minutes = seconds / 60;
   seconds %= 60;
   long hours = minutes / 60;
@@ -29,8 +28,11 @@ string Format::ElapsedTime(long seconds) {
   const auto sep = ':';
 
   const std::string hours_trail = std::string(n_zero - hours_str.length(), '0');
-  const std::string minutes_trail = std::string(n_zero - minutes_str.length(), '0');
-  const std::string seconds_trail = std::string(n_zero - seconds_str.length(), '0');
+  const std::string minutes_trail =
+      std::string(n_zero - minutes_str.length(), '0');
+  const std::string seconds_trail =
+      std::string(n_zero - seconds_str.length(), '0');
 
-  return hours_trail + hours_str + sep + minutes_trail + minutes_str + sep + seconds_trail + seconds_str;
+  return hours_trail + hours_str + sep + minutes_trail + minutes_str + sep +
+         seconds_trail + seconds_str;
 }
