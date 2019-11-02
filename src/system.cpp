@@ -36,5 +36,5 @@ int System::RunningProcesses() { return parser.RunningProcesses(); }
 // DONE: Return the total number of processes on the system
 int System::TotalProcesses() { return parser.TotalProcesses(); }
 
-// TODO: Return the number of seconds since the system started running
-long int System::UpTime() { return 0; }
+// DONE: Return the number of seconds since the system started running
+long int System::UpTime() { return parser.UpTime(); }
