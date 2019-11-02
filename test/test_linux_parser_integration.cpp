@@ -251,3 +251,13 @@ TEST(LinuxParserIntegrationTest, User) {
     EXPECT_EQ(parser.User(4482), "lyra");
   }
 }
+
+TEST(LinuxParserIntegrationTest, ProcessUpTime) {
+  LinuxParser parser(GetTestFsRoot("one"));
+
+  EXPECT_EQ(parser.UpTime(490), 1820L / sysconf(_SC_CLK_TCK));
+
+  EXPECT_EQ(parser.UpTime(83), 21821L / sysconf(_SC_CLK_TCK));
+
+  EXPECT_EQ(parser.UpTime(112), 0);
+}

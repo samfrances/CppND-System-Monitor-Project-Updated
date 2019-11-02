@@ -160,6 +160,11 @@ string LinuxParser::User(int pid) const {
   return "";
 }
 
-// TODO: Read and return the uptime of a process
-// REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::UpTime(int pid[[maybe_unused]]) const { return 0; }
+// DONE: Read and return the uptime of a process
+long LinuxParser::UpTime(int pid) const {
+  std::ifstream stream(LinuxParserPure::Paths::ProcessUpTime(pid, kRoot));
+  if (stream.is_open()) {
+    return LinuxParserPure::ProcessUpTime(stream);
+  }
+  return 0;
+}
