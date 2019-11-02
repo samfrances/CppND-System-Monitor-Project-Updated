@@ -15,7 +15,7 @@ using std::vector;
 
 System::System(const ILinuxParser& p) : parser(p), cpu_(Processor(parser)) {}
 
-// TODO: Return the system's CPU
+// DONE: Return the system's CPU
 IProcessor& System::Cpu() { return cpu_; }
 
 // TODO: Return a container composed of the system's processes
