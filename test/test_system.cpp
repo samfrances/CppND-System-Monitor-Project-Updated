@@ -35,6 +35,21 @@ class MockParser : public ILinuxParser {
   MOCK_METHOD(long int, UpTime, (int pid), (const, override));
 };
 
+TEST(System, Kernel) {
+  MockParser parser;
+  System system(parser);
+
+  std::vector<std::string> expectations{"foo", "bar", "", "blahblah"};
+
+  for (const auto expected : expectations) {
+    ON_CALL(parser, Kernel()).WillByDefault(Return(expected));
+
+    EXPECT_CALL(parser, Kernel()).Times(1);
+
+    EXPECT_EQ(system.Kernel(), expected);
+  }
+}
+
 TEST(System, MemoryUtilization) {
   MockParser parser;
   System system(parser);
@@ -47,5 +62,20 @@ TEST(System, MemoryUtilization) {
     EXPECT_CALL(parser, MemoryUtilization()).Times(1);
 
     EXPECT_EQ(system.MemoryUtilization(), expected);
+  }
+}
+
+TEST(System, OperatingSystem) {
+  MockParser parser;
+  System system(parser);
+
+  std::vector<std::string> expectations{"foo", "bar", "", "blahblah"};
+
+  for (const auto expected : expectations) {
+    ON_CALL(parser, OperatingSystem()).WillByDefault(Return(expected));
+
+    EXPECT_CALL(parser, OperatingSystem()).Times(1);
+
+    EXPECT_EQ(system.OperatingSystem(), expected);
   }
 }
