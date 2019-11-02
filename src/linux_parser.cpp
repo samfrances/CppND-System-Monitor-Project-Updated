@@ -148,9 +148,17 @@ string LinuxParser::Uid(int pid) const {
   return "";
 }
 
-// TODO: Read and return the user associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::User(int pid[[maybe_unused]]) const { return string(); }
+// DONE: Read and return the user associated with a process
+string LinuxParser::User(int pid) const {
+  string uid = Uid(pid);
+  if (!uid.empty()) {
+    std::ifstream stream(LinuxParserPure::Paths::User(kRoot));
+    if (stream.is_open()) {
+      return LinuxParserPure::User(stream, uid);
+    }
+  }
+  return "";
+}
 
 // TODO: Read and return the uptime of a process
 // REMOVE: [[maybe_unused]] once you define the function

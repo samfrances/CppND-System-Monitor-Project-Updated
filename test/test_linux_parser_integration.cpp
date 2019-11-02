@@ -233,3 +233,21 @@ TEST(LinuxParserIntegrationTest, Uid) {
     EXPECT_EQ(parser.Uid(4482), "1000");
   }
 }
+
+TEST(LinuxParserIntegrationTest, User) {
+  {
+    LinuxParser parser(GetTestFsRoot("one"));
+
+    EXPECT_EQ(parser.User(490), "azriel");
+
+    EXPECT_EQ(parser.User(83), "malcolm");
+
+    EXPECT_EQ(parser.User(111), "");
+  }
+
+  {
+    LinuxParser parser(GetTestFsRoot("two"));
+
+    EXPECT_EQ(parser.User(4482), "lyra");
+  }
+}
