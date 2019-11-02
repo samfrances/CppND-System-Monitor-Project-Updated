@@ -35,7 +35,7 @@ class ILinuxParser {
 
 class LinuxParser : public ILinuxParser {
  public:
-  LinuxParser(std::string prefix = "");
+  LinuxParser(std::string prefix = "/");
   // System
   float MemoryUtilization() const override;
   long UpTime() const override;
