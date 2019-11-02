@@ -20,15 +20,15 @@ target_compile_options(monitor PRIVATE -Wall -Wextra)
 # Add the GoogleTest library subdirectory
 add_subdirectory(thirdparty/googletest)
 
+file(GLOB TEST_SOURCES "test/*.cpp")
+
 # Add the testing executable
 add_executable(test
-    test/test_tests.cpp
-    test/test_linux_parser_pure.cpp
-    test/test_linux_parser_integration.cpp
-    test/test_format.cpp
+    ${TEST_SOURCES}
     src/linux_parser_pure.cpp
     src/linux_parser.cpp
-    src/format.cpp)
+    src/format.cpp
+    src/system.cpp)
 
 target_link_libraries(test gmock_main)
 
