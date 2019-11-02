@@ -79,3 +79,18 @@ TEST(System, OperatingSystem) {
     EXPECT_EQ(system.OperatingSystem(), expected);
   }
 }
+
+TEST(System, RunningProcesses) {
+  MockParser parser;
+  System system(parser);
+
+  std::vector<int> expectations{938475, 4, 974, 9, 0, 2184, 33};
+
+  for (const float expected : expectations) {
+    ON_CALL(parser, RunningProcesses()).WillByDefault(Return(expected));
+
+    EXPECT_CALL(parser, RunningProcesses()).Times(1);
+
+    EXPECT_EQ(system.RunningProcesses(), expected);
+  }
+}
