@@ -7,7 +7,17 @@
 
 #include "linux_parser_pure.h"
 
-class ILinuxParser {
+class ILinuxProcessorParser {
+ public:
+  // CPU
+  virtual LinuxParserPure::CpuUtilizationSnapshot CpuUtilization() const = 0;
+  virtual long Jiffies() const = 0;        // TODO consider deleting
+  virtual long ActiveJiffies() const = 0;  // TODO consider deleting
+  virtual long ActiveJiffies(int pid) const = 0;
+  virtual long IdleJiffies() const = 0;  // TODO consider deleting
+};
+
+class ILinuxParser : public ILinuxProcessorParser {
  public:
   // System
   virtual float MemoryUtilization() const = 0;
@@ -17,13 +27,6 @@ class ILinuxParser {
   virtual int RunningProcesses() const = 0;
   virtual std::string OperatingSystem() const = 0;
   virtual std::string Kernel() const = 0;
-
-  // CPU
-  virtual LinuxParserPure::CpuUtilizationSnapshot CpuUtilization() const = 0;
-  virtual long Jiffies() const = 0;        // TODO consider deleting
-  virtual long ActiveJiffies() const = 0;  // TODO consider deleting
-  virtual long ActiveJiffies(int pid) const = 0;
-  virtual long IdleJiffies() const = 0;  // TODO consider deleting
 
   // Processes
   virtual std::string Command(int pid) const = 0;

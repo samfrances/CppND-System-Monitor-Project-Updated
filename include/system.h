@@ -11,7 +11,7 @@
 class System {
  public:
   System(const ILinuxParser& parser);
-  IProcessor& Cpu();                   // TODO: See src/system.cpp
+  IProcessor& Cpu();                  // TODO: See src/system.cpp
   std::vector<Process>& Processes();  // TODO: See src/system.cpp
   float MemoryUtilization();
   long UpTime();
@@ -23,7 +23,7 @@ class System {
   // TODO: Define any necessary private members
  private:
   const ILinuxParser& parser;
-  Processor cpu_ = {};
+  Processor cpu_;
   std::vector<Process> processes_ = {};
 };
 
