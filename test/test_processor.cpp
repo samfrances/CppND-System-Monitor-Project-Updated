@@ -96,6 +96,18 @@ TEST(Processor, Utilization) {
       snapshot6.steal         // steal
       );
 
+  // 100% active
+  LinuxParserPure::CpuUtilizationSnapshot snapshot8(
+      snapshot7.user + 5,    // user
+      snapshot7.nice + 10,   // nice
+      snapshot7.system + 1,  // system
+      snapshot7.idle,        // idle
+      snapshot7.iowait,      // iowait
+      snapshot7.irq,         // irq
+      snapshot7.softirq,     // softirq
+      snapshot7.steal        // steal
+      );
+
   EXPECT_CALL(parser, CpuUtilization())
       .WillOnce(Return(snapshot))
       .WillOnce(Return(snapshot2))
@@ -103,7 +115,8 @@ TEST(Processor, Utilization) {
       .WillOnce(Return(snapshot4))
       .WillOnce(Return(snapshot5))
       .WillOnce(Return(snapshot6))
-      .WillOnce(Return(snapshot7));
+      .WillOnce(Return(snapshot7))
+      .WillOnce(Return(snapshot8));
 
   // Bootstrap
   EXPECT_EQ(proc.Utilization(), 0);
@@ -119,4 +132,6 @@ TEST(Processor, Utilization) {
   EXPECT_NEAR(proc.Utilization(), 0.7, 0.01);
   // No active time
   EXPECT_NEAR(proc.Utilization(), 0, 0.01);
+  // 100% active time
+  EXPECT_NEAR(proc.Utilization(), 1, 0.01);
 }
