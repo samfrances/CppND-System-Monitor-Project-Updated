@@ -20,9 +20,8 @@ class System {
   std::string Kernel();
   std::string OperatingSystem();
 
-  // TODO: Define any necessary private members
  private:
-  const ILinuxParser& parser;
+  const ILinuxParser& parser_;
   Processor cpu_;
   std::vector<Process> processes_ = {};
 };
