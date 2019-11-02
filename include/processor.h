@@ -11,11 +11,14 @@ class IProcessor {
 class Processor : public IProcessor {
  public:
   Processor(const ILinuxProcessorParser& parser);
-  float Utilization() override;  // TODO: See src/processor.cpp
+  float Utilization() override;
 
-  // TODO: Declare any necessary private members
  private:
   const ILinuxProcessorParser& parser_;
+  bool bootstrapping_ = true;
+  long prev_total_jiffies = 0;
+  long prev_active_jiffies = 0;
+  float prev_result = 0;
 };
 
 #endif
