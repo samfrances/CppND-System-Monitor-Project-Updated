@@ -20,11 +20,6 @@ class MockParser : public ILinuxParser {
   // CPU
   MOCK_METHOD(LinuxParserPure::CpuUtilizationSnapshot, CpuUtilization, (),
               (const, override));
-  MOCK_METHOD(long, Jiffies, (), (const, override));  // TODO consider deleting
-  MOCK_METHOD(long, ActiveJiffies, (),
-              (const, override));  // TODO consider deleting
-  MOCK_METHOD(long, IdleJiffies, (),
-              (const, override));  // TODO consider deleting
 
   // Processes
   MOCK_METHOD(std::string, Command, (int pid), (const, override));

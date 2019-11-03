@@ -9,11 +9,7 @@
 
 class ILinuxProcessorParser {
  public:
-  // CPU
   virtual LinuxParserPure::CpuUtilizationSnapshot CpuUtilization() const = 0;
-  virtual long Jiffies() const = 0;        // TODO consider deleting
-  virtual long ActiveJiffies() const = 0;  // TODO consider deleting
-  virtual long IdleJiffies() const = 0;    // TODO consider deleting
 };
 
 class ILinuxProcessParser {
@@ -53,10 +49,6 @@ class LinuxParser : public ILinuxParser {
 
   // CPU
   LinuxParserPure::CpuUtilizationSnapshot CpuUtilization() const override;
-  long Jiffies() const override;
-  long ActiveJiffies() const override;
-  long ActiveJiffies(int pid) const override;
-  long IdleJiffies() const override;
 
   // Processes
   std::string Command(int pid) const override;
@@ -64,6 +56,7 @@ class LinuxParser : public ILinuxParser {
   std::string Uid(int pid) const override;
   std::string User(int pid) const override;
   long int UpTime(int pid) const override;
+  long ActiveJiffies(int pid) const override;
 
  private:
   // Paths
