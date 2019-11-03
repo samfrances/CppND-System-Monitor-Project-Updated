@@ -155,22 +155,21 @@ TEST(Process, LessThan) {
   ON_CALL(parser, UpTime()).WillByDefault(Return(1000));
   ON_CALL(parser, UpTime(_)).WillByDefault(Return(500));
 
-  EXPECT_FALSE(Process(parser, 500) < Process(parser, 600));
-  EXPECT_FALSE(Process(parser, 500) < Process(parser, 700));
-  EXPECT_TRUE(Process(parser, 500) < Process(parser, 800));
+  EXPECT_TRUE(Process(parser, 500) < Process(parser, 600));
+  EXPECT_TRUE(Process(parser, 500) < Process(parser, 700));
+  EXPECT_FALSE(Process(parser, 500) < Process(parser, 800));
 
-  EXPECT_TRUE(Process(parser, 600) < Process(parser, 500));
-  EXPECT_FALSE(Process(parser, 600) < Process(parser, 700));
-  EXPECT_TRUE(Process(parser, 600) < Process(parser, 800));
+  EXPECT_FALSE(Process(parser, 600) < Process(parser, 500));
+  EXPECT_TRUE(Process(parser, 600) < Process(parser, 700));
+  EXPECT_FALSE(Process(parser, 600) < Process(parser, 800));
 
-  EXPECT_TRUE(Process(parser, 700) < Process(parser, 500));
-  EXPECT_FALSE(Process(parser, 700) < Process(parser, 600));
-  EXPECT_TRUE(Process(parser, 700) < Process(parser, 800));
+  EXPECT_FALSE(Process(parser, 700) < Process(parser, 500));
+  EXPECT_TRUE(Process(parser, 700) < Process(parser, 600));
+  EXPECT_FALSE(Process(parser, 700) < Process(parser, 800));
 
-  EXPECT_FALSE(Process(parser, 800) < Process(parser, 500));
-  EXPECT_FALSE(Process(parser, 800) < Process(parser, 600));
-  EXPECT_FALSE(Process(parser, 800) < Process(parser, 700));
-
+  EXPECT_TRUE(Process(parser, 800) < Process(parser, 500));
+  EXPECT_TRUE(Process(parser, 800) < Process(parser, 600));
+  EXPECT_TRUE(Process(parser, 800) < Process(parser, 700));
 }
 
 TEST(Process, CpuUtilization) {

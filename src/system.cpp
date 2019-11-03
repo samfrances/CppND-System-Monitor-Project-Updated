@@ -22,11 +22,12 @@ IProcessor& System::Cpu() { return cpu_; }
 vector<Process>& System::Processes() {
   processes_.clear();
   std::set<Process> sortedProcs;
-  for (auto pid: parser_.Pids()) {
+  for (auto pid : parser_.Pids()) {
     Process proc(parser_, pid);
     sortedProcs.insert(proc);
   }
-  std::copy(sortedProcs.begin(), sortedProcs.end(), std::back_inserter(processes_));
+  std::copy(sortedProcs.begin(), sortedProcs.end(),
+            std::back_inserter(processes_));
   return processes_;
 }
 
