@@ -27,16 +27,16 @@ float Process::CpuUtilization() const {
 }
 
 // DONE: Return the command that generated this process
-string Process::Command() { return parser_.Command(pid_); }
+string Process::Command() const { return parser_.Command(pid_); }
 
 // DONE: Return this process's memory utilization
-string Process::Ram() { return parser_.Ram(pid_); }
+string Process::Ram() const { return parser_.Ram(pid_); }
 
 // DONE: Return the user (name) that generated this process
-string Process::User() { return parser_.User(pid_); }
+string Process::User() const { return parser_.User(pid_); }
 
 // DONE: Return the age of this process (in seconds)
-long int Process::UpTime() { return parser_.UpTime(pid_); }
+long int Process::UpTime() const { return parser_.UpTime(pid_); }
 
 // DONE: Overload the "less than" comparison operator for Process objects
 bool Process::operator<(Process const& a) const {
