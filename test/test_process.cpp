@@ -140,3 +140,15 @@ TEST(Process, UpTime) {
     EXPECT_EQ(process.UpTime(), uptime);
   }
 }
+
+TEST(Process, LessThan) {
+  MockProcessParser parser;
+
+  EXPECT_TRUE(Process(parser, 100) < Process(parser, 101));
+
+  EXPECT_TRUE(Process(parser, 4) < Process(parser, 101));
+
+  EXPECT_FALSE(Process(parser, 101) < Process(parser, 101));
+
+  EXPECT_FALSE(Process(parser, 1010) < Process(parser, 101));
+}
