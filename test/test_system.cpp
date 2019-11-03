@@ -23,7 +23,6 @@ class MockParser : public ILinuxParser {
   MOCK_METHOD(long, Jiffies, (), (const, override));  // TODO consider deleting
   MOCK_METHOD(long, ActiveJiffies, (),
               (const, override));  // TODO consider deleting
-  MOCK_METHOD(long, ActiveJiffies, (int pid), (const, override));
   MOCK_METHOD(long, IdleJiffies, (),
               (const, override));  // TODO consider deleting
 
@@ -33,6 +32,7 @@ class MockParser : public ILinuxParser {
   MOCK_METHOD(std::string, Uid, (int pid), (const, override));
   MOCK_METHOD(std::string, User, (int pid), (const, override));
   MOCK_METHOD(long int, UpTime, (int pid), (const, override));
+  MOCK_METHOD(long, ActiveJiffies, (int pid), (const, override));
 };
 
 TEST(System, Kernel) {

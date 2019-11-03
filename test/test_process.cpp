@@ -13,6 +13,7 @@ class MockProcessParser : public ILinuxProcessParser {
   MOCK_METHOD(std::string, Uid, (int pid), (const, override));
   MOCK_METHOD(std::string, User, (int pid), (const, override));
   MOCK_METHOD(long int, UpTime, (int pid), (const, override));
+  MOCK_METHOD(long, ActiveJiffies, (int pid), (const, override));
 };
 
 TEST(Process, Pid) {

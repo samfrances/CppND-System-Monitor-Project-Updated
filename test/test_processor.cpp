@@ -13,7 +13,6 @@ class MockProcessorParser : public ILinuxProcessorParser {
   MOCK_METHOD(long, Jiffies, (), (const, override));  // TODO consider deleting
   MOCK_METHOD(long, ActiveJiffies, (),
               (const, override));  // TODO consider deleting
-  MOCK_METHOD(long, ActiveJiffies, (int pid), (const, override));
   MOCK_METHOD(long, IdleJiffies, (),
               (const, override));  // TODO consider deleting
 };
