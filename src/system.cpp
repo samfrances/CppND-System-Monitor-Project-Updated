@@ -21,11 +21,12 @@ IProcessor& System::Cpu() { return cpu_; }
 // TODO: Return a container composed of the system's processes
 vector<Process>& System::Processes() {
   processes_.clear();
-  auto pids = parser_.Pids();
-  for (auto pid: pids) {
-    const Process proc(parser_, pid);
-    processes_.push_back(proc);
+  std::set<Process> sortedProcs;
+  for (auto pid: parser_.Pids()) {
+    Process proc(parser_, pid);
+    sortedProcs.insert(proc);
   }
+  std::copy(sortedProcs.begin(), sortedProcs.end(), std::back_inserter(processes_));
   return processes_;
 }
 
