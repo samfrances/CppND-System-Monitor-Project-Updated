@@ -28,8 +28,8 @@ string Process::Ram() { return parser_.Ram(pid_); }
 // DONE: Return the user (name) that generated this process
 string Process::User() { return parser_.User(pid_); }
 
-// TODO: Return the age of this process (in seconds)
-long int Process::UpTime() { return 0; }
+// DONE: Return the age of this process (in seconds)
+long int Process::UpTime() { return parser_.UpTime(pid_); }
 
 // TODO: Overload the "less than" comparison operator for Process objects
 // REMOVE: [[maybe_unused]] once you define the function

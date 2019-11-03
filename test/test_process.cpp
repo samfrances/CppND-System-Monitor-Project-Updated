@@ -112,3 +112,31 @@ TEST(Process, Ram) {
     EXPECT_EQ(process.Ram(), ram);
   }
 }
+
+TEST(Process, UpTime) {
+  {
+    MockProcessParser parser;
+
+    int pid = 84;
+    long uptime = 883934;
+
+    ON_CALL(parser, UpTime(pid)).WillByDefault(Return(uptime));
+    EXPECT_CALL(parser, UpTime(pid)).Times(1);
+
+    Process process(parser, pid);
+    EXPECT_EQ(process.UpTime(), uptime);
+  }
+
+  {
+    MockProcessParser parser;
+
+    int pid = 3;
+    long uptime = 99;
+
+    ON_CALL(parser, UpTime(pid)).WillByDefault(Return(uptime));
+    EXPECT_CALL(parser, UpTime(pid)).Times(1);
+
+    Process process(parser, pid);
+    EXPECT_EQ(process.UpTime(), uptime);
+  }
+}
