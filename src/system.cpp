@@ -19,7 +19,15 @@ System::System(const ILinuxParser& p) : parser_(p), cpu_(Processor(parser_)) {}
 IProcessor& System::Cpu() { return cpu_; }
 
 // TODO: Return a container composed of the system's processes
-vector<Process>& System::Processes() { return processes_; }
+vector<Process> System::Processes() {
+  processes_.clear();
+  const auto pids = parser_.Pids();
+  for (auto pid: pids) {
+    const Process proc(parser_, pid);
+    processes_.push_back(proc);
+  }
+  return processes_;
+}
 
 // DONE: Return the system's kernel identifier (string)
 std::string System::Kernel() { return parser_.Kernel(); }
