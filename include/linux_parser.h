@@ -13,7 +13,7 @@ class ILinuxProcessorParser {
   virtual LinuxParserPure::CpuUtilizationSnapshot CpuUtilization() const = 0;
   virtual long Jiffies() const = 0;        // TODO consider deleting
   virtual long ActiveJiffies() const = 0;  // TODO consider deleting
-  virtual long IdleJiffies() const = 0;  // TODO consider deleting
+  virtual long IdleJiffies() const = 0;    // TODO consider deleting
 };
 
 class ILinuxProcessParser {
@@ -23,6 +23,7 @@ class ILinuxProcessParser {
   virtual std::string Uid(int pid) const = 0;
   virtual std::string User(int pid) const = 0;
   virtual long int UpTime(int pid) const = 0;
+  virtual long UpTime() const = 0;
   virtual long ActiveJiffies(int pid) const = 0;
 };
 

@@ -16,8 +16,15 @@ Process::Process(const ILinuxProcessParser& parser, int pid)
 // DONE: Return this process's ID
 int Process::Pid() const { return pid_; }
 
-// TODO: Return this process's CPU utilization
-float Process::CpuUtilization() { return 0; }
+// DONE: Return this process's CPU utilization
+float Process::CpuUtilization() {
+  const float hertz = sysconf(_SC_CLK_TCK);
+  const float total_time = (float)parser_.ActiveJiffies(pid_) / hertz;
+  const auto uptime = parser_.UpTime();
+  const auto starttime = parser_.UpTime(pid_);
+
+  return total_time / (float)(uptime - starttime);
+}
 
 // DONE: Return the command that generated this process
 string Process::Command() { return parser_.Command(pid_); }

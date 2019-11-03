@@ -13,6 +13,7 @@ class MockProcessParser : public ILinuxProcessParser {
   MOCK_METHOD(std::string, Uid, (int pid), (const, override));
   MOCK_METHOD(std::string, User, (int pid), (const, override));
   MOCK_METHOD(long int, UpTime, (int pid), (const, override));
+  MOCK_METHOD(long int, UpTime, (), (const, override));
   MOCK_METHOD(long, ActiveJiffies, (int pid), (const, override));
 };
 
@@ -152,4 +153,28 @@ TEST(Process, LessThan) {
   EXPECT_FALSE(Process(parser, 101) < Process(parser, 101));
 
   EXPECT_FALSE(Process(parser, 1010) < Process(parser, 101));
+}
+
+TEST(Process, CpuUtilization) {
+  MockProcessParser parser;
+
+  const int pid = 558;
+  const long active_jiffies = 10000;
+  const auto hertz = sysconf(_SC_CLK_TCK);
+  const float total_time = (float)active_jiffies / (float)hertz;
+  const long starttime = 100;
+  const long uptime = 300;
+
+  ON_CALL(parser, ActiveJiffies(pid)).WillByDefault(Return(active_jiffies));
+  ON_CALL(parser, UpTime(pid)).WillByDefault(Return(starttime));
+  ON_CALL(parser, UpTime()).WillByDefault(Return(uptime));
+
+  EXPECT_CALL(parser, ActiveJiffies(pid)).Times(1);
+  EXPECT_CALL(parser, UpTime(pid)).Times(1);
+  EXPECT_CALL(parser, UpTime()).Times(1);
+
+  Process process(parser, pid);
+
+  const float expected = (total_time / (float)(uptime - starttime));
+  EXPECT_EQ(process.CpuUtilization(), expected);
 }
