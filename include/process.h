@@ -13,7 +13,7 @@ class Process {
  public:
   Process(const ILinuxProcessParser& parser, int pid);
   int Pid();
-  std::string User();                      // TODO: See src/process.cpp
+  std::string User();
   std::string Command();
   float CpuUtilization();                  // TODO: See src/process.cpp
   std::string Ram();                       // TODO: See src/process.cpp

@@ -29,6 +29,34 @@ TEST(Process, Pid) {
   }
 }
 
+TEST(Process, User) {
+  {
+    MockProcessParser parser;
+
+    int pid = 10;
+    std::string user = "bob";
+
+    ON_CALL(parser, User(pid)).WillByDefault(Return(user));
+    EXPECT_CALL(parser, User(pid)).Times(1);
+
+    Process process(parser, pid);
+    EXPECT_EQ(process.User(), user);
+  }
+
+  {
+    MockProcessParser parser;
+
+    int pid = 698;
+    std::string user = "steve";
+
+    ON_CALL(parser, User(pid)).WillByDefault(Return(user));
+    EXPECT_CALL(parser, User(pid)).Times(1);
+
+    Process process(parser, pid);
+    EXPECT_EQ(process.User(), user);
+  }
+}
+
 TEST(Process, Command) {
   {
     MockProcessParser parser;
@@ -37,6 +65,7 @@ TEST(Process, Command) {
     std::string command = "foo --bar";
 
     ON_CALL(parser, Command(pid)).WillByDefault(Return(command));
+    EXPECT_CALL(parser, Command(pid)).Times(1);
 
     Process process(parser, pid);
     EXPECT_EQ(process.Command(), command);
@@ -49,6 +78,7 @@ TEST(Process, Command) {
     std::string command = "/user/bin/blah --n 5";
 
     ON_CALL(parser, Command(pid)).WillByDefault(Return(command));
+    EXPECT_CALL(parser, Command(pid)).Times(1);
 
     Process process(parser, pid);
     EXPECT_EQ(process.Command(), command);
