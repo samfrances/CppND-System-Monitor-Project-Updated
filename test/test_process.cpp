@@ -5,6 +5,7 @@
 #include "process.h"
 
 using ::testing::Return;
+using ::testing::_;
 
 class MockProcessParser : public ILinuxProcessParser {
  public:
@@ -146,13 +147,30 @@ TEST(Process, UpTime) {
 TEST(Process, LessThan) {
   MockProcessParser parser;
 
-  EXPECT_TRUE(Process(parser, 100) < Process(parser, 101));
+  ON_CALL(parser, ActiveJiffies(500)).WillByDefault(Return(100));
+  ON_CALL(parser, ActiveJiffies(600)).WillByDefault(Return(90));
+  ON_CALL(parser, ActiveJiffies(700)).WillByDefault(Return(90));
+  ON_CALL(parser, ActiveJiffies(800)).WillByDefault(Return(200));
 
-  EXPECT_TRUE(Process(parser, 4) < Process(parser, 101));
+  ON_CALL(parser, UpTime()).WillByDefault(Return(1000));
+  ON_CALL(parser, UpTime(_)).WillByDefault(Return(500));
 
-  EXPECT_FALSE(Process(parser, 101) < Process(parser, 101));
+  EXPECT_FALSE(Process(parser, 500) < Process(parser, 600));
+  EXPECT_FALSE(Process(parser, 500) < Process(parser, 700));
+  EXPECT_TRUE(Process(parser, 500) < Process(parser, 800));
 
-  EXPECT_FALSE(Process(parser, 1010) < Process(parser, 101));
+  EXPECT_TRUE(Process(parser, 600) < Process(parser, 500));
+  EXPECT_FALSE(Process(parser, 600) < Process(parser, 700));
+  EXPECT_TRUE(Process(parser, 600) < Process(parser, 800));
+
+  EXPECT_TRUE(Process(parser, 700) < Process(parser, 500));
+  EXPECT_FALSE(Process(parser, 700) < Process(parser, 600));
+  EXPECT_TRUE(Process(parser, 700) < Process(parser, 800));
+
+  EXPECT_FALSE(Process(parser, 800) < Process(parser, 500));
+  EXPECT_FALSE(Process(parser, 800) < Process(parser, 600));
+  EXPECT_FALSE(Process(parser, 800) < Process(parser, 700));
+
 }
 
 TEST(Process, CpuUtilization) {

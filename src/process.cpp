@@ -17,7 +17,7 @@ Process::Process(const ILinuxProcessParser& parser, int pid)
 int Process::Pid() const { return pid_; }
 
 // DONE: Return this process's CPU utilization
-float Process::CpuUtilization() {
+float Process::CpuUtilization() const {
   const float hertz = sysconf(_SC_CLK_TCK);
   const float total_time = (float)parser_.ActiveJiffies(pid_) / hertz;
   const auto uptime = parser_.UpTime();
@@ -39,4 +39,4 @@ string Process::User() { return parser_.User(pid_); }
 long int Process::UpTime() { return parser_.UpTime(pid_); }
 
 // DONE: Overload the "less than" comparison operator for Process objects
-bool Process::operator<(Process const& a) const { return Pid() < a.Pid(); }
+bool Process::operator<(Process const& a) const { return CpuUtilization() < a.CpuUtilization(); }
