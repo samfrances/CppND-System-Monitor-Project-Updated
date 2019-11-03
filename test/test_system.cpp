@@ -138,7 +138,7 @@ TEST(System, Processes) {
   {
     std::vector<int> pids_expected = pids;
     std::vector<int> pids_found;
-    for (auto p: system.Processes()) {
+    for (auto p : system.Processes()) {
       pids_found.push_back(p.Pid());
     }
 
