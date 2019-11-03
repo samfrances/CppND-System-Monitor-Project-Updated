@@ -84,3 +84,31 @@ TEST(Process, Command) {
     EXPECT_EQ(process.Command(), command);
   }
 }
+
+TEST(Process, Ram) {
+  {
+    MockProcessParser parser;
+
+    int pid = 5;
+    std::string ram = "34820.23";
+
+    ON_CALL(parser, Ram(pid)).WillByDefault(Return(ram));
+    EXPECT_CALL(parser, Ram(pid)).Times(1);
+
+    Process process(parser, pid);
+    EXPECT_EQ(process.Ram(), ram);
+  }
+
+  {
+    MockProcessParser parser;
+
+    int pid = 3245;
+    std::string ram = "84749";
+
+    ON_CALL(parser, Ram(pid)).WillByDefault(Return(ram));
+    EXPECT_CALL(parser, Ram(pid)).Times(1);
+
+    Process process(parser, pid);
+    EXPECT_EQ(process.Ram(), ram);
+  }
+}

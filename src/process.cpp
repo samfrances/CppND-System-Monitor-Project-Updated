@@ -22,8 +22,8 @@ float Process::CpuUtilization() { return 0; }
 // DONE: Return the command that generated this process
 string Process::Command() { return parser_.Command(pid_); }
 
-// TODO: Return this process's memory utilization
-string Process::Ram() { return string(); }
+// DONE: Return this process's memory utilization
+string Process::Ram() { return parser_.Ram(pid_); }
 
 // DONE: Return the user (name) that generated this process
 string Process::User() { return parser_.User(pid_); }
