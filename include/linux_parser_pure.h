@@ -23,7 +23,7 @@ class CpuUtilizationSnapshot {
  public:
   CpuUtilizationSnapshot(long user, long nice, long system, long idle,
                          long iowait, long irq, long softirq, long steal);
-  CpuUtilizationSnapshot();  // TODO remove
+  CpuUtilizationSnapshot();
   const long user = 0;
   const long nice = 0;
   const long system = 0;
