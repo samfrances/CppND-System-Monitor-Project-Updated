@@ -1,5 +1,7 @@
 #include "gmock/gmock.h"
 
+#include <vector>
+
 #include "linux_parser.h"
 #include "linux_parser_pure.h"
 #include "system.h"
@@ -117,5 +119,32 @@ TEST(System, UpTime) {
     EXPECT_CALL(parser, UpTime()).Times(1);
 
     EXPECT_EQ(system.UpTime(), expected);
+  }
+}
+
+TEST(System, Processes) {
+  MockParser parser;
+  System system(parser);
+
+  std::vector<int> pids{1, 38, 887, 2340, 3};
+
+  // This stops set deduplication when sorting
+  ON_CALL(parser, Pids()).WillByDefault(Return(pids));
+
+  EXPECT_EQ(system.Processes().size(), 5);
+  // Make sure doesn't change
+  EXPECT_EQ(system.Processes().size(), 5);
+
+  {
+    std::vector<int> pids_expected = pids;
+    std::vector<int> pids_found;
+    for (auto p: system.Processes()) {
+      pids_found.push_back(p.Pid());
+    }
+
+    std::sort(pids_expected.begin(), pids_expected.end());
+    std::sort(pids_found.begin(), pids_found.end());
+
+    EXPECT_THAT(pids_found, ::testing::ContainerEq(pids_expected));
   }
 }

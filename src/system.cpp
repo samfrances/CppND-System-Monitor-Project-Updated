@@ -18,10 +18,10 @@ System::System(const ILinuxParser& p) : parser_(p), cpu_(Processor(parser_)) {}
 // DONE: Return the system's CPU
 IProcessor& System::Cpu() { return cpu_; }
 
-// TODO: Return a container composed of the system's processes
+// DONE: Return a container composed of the system's processes
 vector<Process>& System::Processes() {
   processes_.clear();
-  std::set<Process> sortedProcs;
+  std::multiset<Process> sortedProcs;
   for (auto pid : parser_.Pids()) {
     Process proc(parser_, pid);
     sortedProcs.insert(proc);
