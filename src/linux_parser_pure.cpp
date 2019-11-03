@@ -181,8 +181,7 @@ LinuxParserPure::CpuUtilizationSnapshot::CpuUtilizationSnapshot(
       softirq(softirq),
       steal(steal) {}
 
-LinuxParserPure::CpuUtilizationSnapshot::CpuUtilizationSnapshot()  // TODO
-                                                                   // remove
+LinuxParserPure::CpuUtilizationSnapshot::CpuUtilizationSnapshot()
     : user(0),
       nice(0),
       system(0),
