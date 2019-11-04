@@ -271,6 +271,7 @@ long int LinuxParserPure::ProcessUpTime(std::istream& filestream) {
     }
     return stol(starttime) / sysconf(_SC_CLK_TCK);
   }
+  return 0;
 }
 
 string LinuxParserPure::Paths::ProcessUpTime(int pid, std::string root) {
@@ -295,6 +296,7 @@ long int LinuxParserPure::ActiveJiffiesForProcess(std::istream& filestream) {
     }
     return utime + stime;
   }
+  return 0;
 }
 
 string LinuxParserPure::Paths::ActiveJiffiesForProcess(int pid,
