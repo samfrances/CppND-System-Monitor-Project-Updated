@@ -3,15 +3,10 @@
 
 #include "linux_parser.h"
 
-class IProcessor {
- public:
-  virtual float Utilization() = 0;
-};
-
-class Processor : public IProcessor {
+class Processor {
  public:
   Processor(const ILinuxProcessorParser& parser);
-  float Utilization() override;
+  float Utilization();
 
  private:
   const ILinuxProcessorParser& parser_;
